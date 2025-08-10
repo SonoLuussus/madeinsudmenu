@@ -13,22 +13,19 @@
   html, body {
     height: 100%;
     margin: 0;
-    background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
+    background: #fff;
   }
 
   @font-face {
-    font-family: 'Fontspring-DEMO-modica-bold';
+    font-family: 'Modica Bold';
     src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
   }
-
   @font-face {
-    font-family: 'Fontspring-DEMO-modica-regular';
+    font-family: 'Modica Regular';
     src: url('fonts/Fontspring-DEMO-modica-regular.otf') format('opentype');
   }
-
   @font-face {
-    font-family: 'ArialRoundedMTBold';
+    font-family: 'Arial Rounded';
     src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
   }
 
@@ -38,50 +35,42 @@
     margin: 0 auto;
     padding: 18px;
     box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   .logo img {
     width: 100%;
     height: auto;
     display: block;
-    transition: opacity 0.28s ease, transform 0.28s ease;
-  }
-
-  .logo img.fading {
-    opacity: 0;
-    transform: scale(0.985);
   }
 
   .menu {
-    margin-top: 20px;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: calc(100vh - 200px); /* tutti i titoli in una pagina */
+    justify-content: space-between; /* titoli distribuiti verticalmente */
+    gap: 0;
   }
 
   .menu-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 26px; /* ridotto per far stare tutti i titoli */
+    font-family: 'Modica Bold', sans-serif;
+    font-size: 26px;
     color: var(--black);
     cursor: pointer;
-    padding: 4px 0;
+    padding: 6px 0;
     user-select: none;
   }
 
-  .menu-item .label {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
   .menu-item .plus {
-    font-family: 'ArialRoundedMTBold', sans-serif;
-    font-size: 26px;
+    font-family: 'Arial Rounded', sans-serif;
+    font-size: 28px;
     font-weight: bold;
     transition: transform 0.28s ease;
-    display: inline-block;
   }
 
   .menu-item.open .plus {
@@ -93,8 +82,7 @@
     max-height: 0;
     opacity: 0;
     transform: translateY(-6px);
-    transition: max-height 0.45s cubic-bezier(.2,.9,.2,1),
-                opacity 0.35s ease, transform 0.35s ease;
+    transition: max-height 0.45s cubic-bezier(.2, .9, .2, 1), opacity 0.35s ease, transform 0.35s ease;
   }
 
   .submenu.open {
@@ -103,19 +91,20 @@
     transform: translateY(0);
   }
 
-  .submenu .submenu-item {
-    font-family: 'Fontspring-DEMO-modica-regular', sans-serif;
-    padding: 4px 0 4px 18px;
-    font-size: 18px;
+  .submenu-item {
+    padding: 6px 0 6px 18px;
+    font-family: 'Modica Regular', sans-serif;
+    font-size: 20px;
     color: var(--black);
-    opacity: 0;
-    transform: translateY(6px);
-    transition: transform 0.35s ease, opacity 0.35s ease;
+    display: flex;
+    justify-content: space-between;
   }
 
-  .submenu.open .submenu-item {
-    opacity: 1;
-    transform: none;
+  /* Quando un menu è aperto, la disposizione titoli torna normale con scroll */
+  body.menu-open .menu {
+    justify-content: flex-start;
+    gap: 18px;
+    overflow-y: auto;
   }
 </style>
 </head>
@@ -125,32 +114,94 @@
       <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
     </header>
 
-    <nav class="menu">
-      <div class="menu-item"><span class="label">Antipasti</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Friggitoria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Pizze</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Pucce</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Taglieri</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Braceria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Bevande</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Cocktail</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Birre</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Vini</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Dolci</span><span class="plus">+</span></div>
+    <nav class="menu" id="menuContainer">
+      <div class="menu-item" data-category="antipasti"><span>Antipasti</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Gulash</span><span>10€</span></div>
+        <div class="submenu-item"><span>Lumache</span><span>15€</span></div>
+        <div class="submenu-item"><span>Polipo Arrosto</span><span>13€</span></div>
+        <div class="submenu-item"><span>Cozze Fritte</span><span>10€</span></div>
+        <div class="submenu-item"><span>Verdure Grigliate</span><span>7€</span></div>
+        <div class="submenu-item"><span>Uccelletti</span><span>6€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="friggitoria"><span>Friggitoria</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Arancini</span><span>3€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="pizze"><span>Pizze</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Margherita</span><span>5€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="pucce"><span>Pucce</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Puccia Salentina</span><span>6€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="taglieri"><span>Taglieri</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Misto Salumi</span><span>12€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="braceria"><span>Braceria</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Costata</span><span>18€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="bevande"><span>Bevande</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Acqua</span><span>1€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="cocktail"><span>Cocktail</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Mojito</span><span>6€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="birre"><span>Birre</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Birra Chiara</span><span>4€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="vini"><span>Vini</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Rosso Locale</span><span>10€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="caffe"><span>Caffè & Amari</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Caffè</span><span>1€</span></div>
+      </div>
+
+      <div class="menu-item" data-category="dolci"><span>Dolci</span><span class="plus">+</span></div>
+      <div class="submenu">
+        <div class="submenu-item"><span>Tiramisù</span><span>4€</span></div>
+      </div>
     </nav>
   </div>
 
 <script>
-  document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const openItem = document.querySelector('.menu-item.open');
-      if (openItem && openItem !== item) {
-        openItem.classList.remove('open');
-      }
-      item.classList.toggle('open');
-    });
+document.querySelectorAll('.menu-item').forEach((item, index) => {
+  item.addEventListener('click', () => {
+    const submenu = item.nextElementSibling;
+    const plus = item.querySelector('.plus');
+    const isOpen = submenu.classList.contains('open');
+
+    document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
+    document.querySelectorAll('.plus').forEach(p => p.textContent = '+');
+    document.body.classList.remove('menu-open');
+
+    if (!isOpen) {
+      submenu.classList.add('open');
+      item.classList.add('open');
+      plus.textContent = '−';
+      document.body.classList.add('menu-open');
+    }
   });
+});
 </script>
 </body>
 </html>
