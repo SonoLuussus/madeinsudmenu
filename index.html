@@ -3,242 +3,113 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Made in Sud - Menu</title>
-
+<title>Menu senza scroll</title>
 <style>
-  :root{
-    --black: #000;
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* blocca scroll pagina */
+    font-family: Arial, sans-serif;
+    background: #eee;
   }
-
-  html,body{
-    height:100%;
-    margin:0;
-    background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
-    overflow: hidden; /* blocca lo scroll pagina */
+  .phone {
+    width: 390px;
+    max-width: 100%;
+    height: 100vh; /* tutta l'altezza viewport */
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    background: white;
+    overflow: hidden; /* niente scroll */
   }
-
-  @font-face{
-    font-family: 'Fontspring-DEMO-modica-bold';
-    src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
-  }
-  @font-face{
-    font-family: 'Fontspring-DEMO-modica-thin';
-    src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype');
-  }
-  @font-face{
-    font-family: 'Fontspring-DEMO-modica-regular';
-    src: url('fonts/Fontspring-DEMO-modica-regular.otf') format('opentype');
-  }
-  @font-face{
-    font-family: 'ArialRoundedMTBold';
-    src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
-  }
-
-  .phone{
-    width:390px;
-    max-width:100%;
-    margin:0 auto;
-    padding:18px;
-    box-sizing:border-box;
-
-    height: 100vh; /* piena altezza viewport */
+  nav.menu {
     display: flex;
     flex-direction: column;
-    background: rgba(255,255,255,0.85); /* sfondo semitrasparente per leggibilità */
+    gap: 10px;
   }
-
-  .logo img{
-    width:100%;
-    height:auto;
-    display:block;
-    transition: opacity 0.28s ease, transform 0.28s ease;
-  }
-
-  nav.menu {
-    margin-top: 10px;
-    flex-grow: 1; /* prende tutto lo spazio rimasto */
-    overflow-y: auto; /* scroll interno se serve */
-    -webkit-overflow-scrolling: touch; /* scroll fluido su iOS */
-  }
-
-  .menu{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-  }
-
-  .menu-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:34px;
-    color:var(--black);
-    cursor:pointer;
-    padding:8px 0;
-    user-select:none;
-    font-family: 'Fontspring-DEMO-modica-bold';
-  }
-
-  .menu-item .plus{
-    font-family: 'ArialRoundedMTBold';
-    font-size:34px;
-    font-weight:bold;
-    transition: transform 0.28s ease;
-    display:inline-block;
-  }
-  .menu-item.open .plus{
-    transform: rotate(180deg);
-  }
-
-  .submenu{
-    overflow:hidden;
-    max-height:0;
-    opacity:0;
-    transform: translateY(-6px);
-    transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
-  }
-  .submenu.open{
-    max-height: 500px; /* abbastanza per tutti i sottoelementi */
-    opacity:1;
-    transform: translateY(0);
-  }
-
-  .submenu .submenu-item{
-    padding:8px 0 8px 18px;
-    font-size:22px;
-    color:var(--black);
-    opacity:0;
-    transform: translateY(6px);
-    transition: transform 0.35s ease, opacity 0.35s ease;
+  .menu-item {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
-    font-family: 'Fontspring-DEMO-modica-regular';
+    user-select: none;
+    padding: 8px;
+    background: #ddd;
+    border-radius: 5px;
   }
-
-  .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
-
-  @media (max-width:420px){
-    .menu-item{ font-size:30px; }
-    .menu-item .plus{ font-size:30px; }
-    .submenu .submenu-item{ font-size:20px; }
+  .menu-item .plus {
+    font-weight: normal;
+    transition: transform 0.3s ease;
+  }
+  .menu-item.open .plus {
+    transform: rotate(180deg);
+  }
+  .submenu {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    background: #f9f9f9;
+    padding-left: 15px;
+    border-left: 3px solid #aaa;
+    border-radius: 0 5px 5px 0;
+  }
+  .submenu.open {
+    opacity: 1;
+    max-height: 500px; /* valore alto per contenere */
+  }
+  .submenu-item {
+    padding: 6px 0;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
   }
 </style>
 </head>
 <body>
   <div class="phone">
-    <header class="logo">
-      <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
-    </header>
-
     <nav class="menu">
-      <!-- Antipasti -->
-      <div class="menu-item" data-target="antipastiList"><span class="label">Antipasti</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="antipastiList">Antipasti <span class="plus">+</span></div>
       <div id="antipastiList" class="submenu">
         <div class="submenu-item"><span>Gulash</span><span>10€</span></div>
         <div class="submenu-item"><span>Lumache</span><span>15€</span></div>
-        <div class="submenu-item"><span>Polipo Arrosto</span><span>13€</span></div>
-        <div class="submenu-item"><span>Cozze Fritte</span><span>10€</span></div>
-        <div class="submenu-item"><span>Verdure Grigliate</span><span>7€</span></div>
-        <div class="submenu-item"><span>Uccelletti</span><span>6€</span></div>
       </div>
 
-      <!-- Friggitoria -->
-      <div class="menu-item" data-target="friggitoriaList"><span class="label">Friggitoria</span><span class="plus">+</span></div>
-      <div id="friggitoriaList" class="submenu">
-        <div class="submenu-item"><span>Supplì</span><span>2€</span></div>
-        <div class="submenu-item"><span>Arancini</span><span>3€</span></div>
-      </div>
-
-      <!-- Pizze -->
-      <div class="menu-item" data-target="pizzeList"><span class="label">Pizze</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="pizzeList">Pizze <span class="plus">+</span></div>
       <div id="pizzeList" class="submenu">
         <div class="submenu-item"><span>Margherita</span><span>5€</span></div>
         <div class="submenu-item"><span>Diavola</span><span>7€</span></div>
       </div>
 
-      <!-- Pucce -->
-      <div class="menu-item" data-target="pucceList"><span class="label">Pucce</span><span class="plus">+</span></div>
-      <div id="pucceList" class="submenu">
-        <div class="submenu-item"><span>Puccia Classica</span><span>5€</span></div>
-      </div>
-
-      <!-- Taglieri -->
-      <div class="menu-item" data-target="taglieriList"><span class="label">Taglieri</span><span class="plus">+</span></div>
-      <div id="taglieriList" class="submenu">
-        <div class="submenu-item"><span>Tagliere Misto</span><span>12€</span></div>
-      </div>
-
-      <!-- Braceria -->
-      <div class="menu-item" data-target="braceriaList"><span class="label">Braceria</span><span class="plus">+</span></div>
-      <div id="braceriaList" class="submenu">
-        <div class="submenu-item"><span>Costata</span><span>20€</span></div>
-      </div>
-
-      <!-- Bevande -->
-      <div class="menu-item" data-target="bevandeList"><span class="label">Bevande</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="bevandeList">Bevande <span class="plus">+</span></div>
       <div id="bevandeList" class="submenu">
         <div class="submenu-item"><span>Acqua</span><span>1€</span></div>
-      </div>
-
-      <!-- Cocktail -->
-      <div class="menu-item" data-target="cocktailList"><span class="label">Cocktail</span><span class="plus">+</span></div>
-      <div id="cocktailList" class="submenu">
-        <div class="submenu-item"><span>Mojito</span><span>6€</span></div>
-      </div>
-
-      <!-- Birre -->
-      <div class="menu-item" data-target="birreList"><span class="label">Birre</span><span class="plus">+</span></div>
-      <div id="birreList" class="submenu">
-        <div class="submenu-item"><span>Birra Artigianale</span><span>5€</span></div>
-      </div>
-
-      <!-- Vini -->
-      <div class="menu-item" data-target="viniList"><span class="label">Vini</span><span class="plus">+</span></div>
-      <div id="viniList" class="submenu">
-        <div class="submenu-item"><span>Rosso della Casa</span><span>4€</span></div>
-      </div>
-
-      <!-- Caffè & Amari -->
-      <div class="menu-item" data-target="caffeList"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
-      <div id="caffeList" class="submenu">
-        <div class="submenu-item"><span>Caffè</span><span>1€</span></div>
-      </div>
-
-      <!-- Dolci -->
-      <div class="menu-item" data-target="dolciList"><span class="label">Dolci</span><span class="plus">+</span></div>
-      <div id="dolciList" class="submenu">
-        <div class="submenu-item"><span>Tiramisù</span><span>4€</span></div>
+        <div class="submenu-item"><span>Coca-Cola</span><span>2€</span></div>
       </div>
     </nav>
   </div>
 
 <script>
-  document.querySelectorAll('.menu-item').forEach(item => {
+  const items = document.querySelectorAll('.menu-item');
+  items.forEach(item => {
     item.addEventListener('click', () => {
       const targetId = item.getAttribute('data-target');
       const submenu = document.getElementById(targetId);
 
-      // Chiudi tutte le altre
-      document.querySelectorAll('.submenu').forEach(sm => {
-        if(sm !== submenu){
-          sm.classList.remove('open');
-          sm.previousElementSibling.classList.remove('open');
-          sm.previousElementSibling.querySelector('.plus').textContent = '+';
-        }
-      });
-
-      // Apri/chiudi la selezionata
-      if(submenu.classList.contains('open')){
+      if(submenu.classList.contains('open')) {
+        // Chiudo
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
       } else {
+        // Chiudo tutti
+        document.querySelectorAll('.submenu').forEach(sm => sm.classList.remove('open'));
+        document.querySelectorAll('.menu-item').forEach(mi => {
+          mi.classList.remove('open');
+          mi.querySelector('.plus').textContent = '+';
+        });
+        // Apro quello cliccato
         submenu.classList.add('open');
         item.classList.add('open');
         item.querySelector('.plus').textContent = '−';
