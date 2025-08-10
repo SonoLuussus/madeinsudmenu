@@ -10,9 +10,18 @@
     --black: #000;
   }
 
+  /* Font piatti e testi */
   @font-face{
     font-family: 'Fontspring-DEMO-modica-bold';
     src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* Font per + e − */
+  @font-face{
+    font-family: 'ArialRoundedMTBold';
+    src: url('fonts/Arial Rounded MT Bold.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
@@ -70,6 +79,7 @@
   .menu-item .plus{
     font-size:34px;
     font-weight:bold;
+    font-family: 'ArialRoundedMTBold', sans-serif;
     transition: transform 0.28s ease;
     display:inline-block;
   }
