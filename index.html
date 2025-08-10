@@ -10,35 +10,28 @@
     --black: #000;
   }
 
-  /* Font titoli principali */
-  @font-face{
-    font-family: 'FontspringBold';
-    src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  /* Font simboli + e − */
-  @font-face{
-    font-family: 'ArialRoundedMTBold';
-    src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  /* Font voci sotto-menu */
-  @font-face{
-    font-family: 'Fontspringregular';
-    src: url('fonts/Fontspring-DEMO-modica-regular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
-
   html,body{
     height:100%;
     margin:0;
     background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'FontspringBold', sans-serif;
+    font-family: 'Fontspring DEMO Modica Ultra', sans-serif;
+  }
+
+  @font-face{
+    font-family: 'Fontspring DEMO Modica Ultra';
+    src: url('fonts/Fontspring-DEMO-modica-ultra.otf') format('opentype');
+  }
+  @font-face{
+    font-family: 'Fontspring DEMO Modica Thin';
+    src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype');
+  }
+  @font-face{
+    font-family: 'Arial Rounded MT Bold';
+    src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
+  }
+  @font-face{
+    font-family: 'Fontspring DEMO Modica Bold';
+    src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
   }
 
   .phone{
@@ -72,17 +65,23 @@
     justify-content:space-between;
     align-items:center;
     font-size:34px;
+    font-family: 'Fontspring DEMO Modica Bold', sans-serif;
     color:var(--black);
     cursor:pointer;
     padding:8px 0;
     user-select:none;
-    font-family: 'FontspringBold', sans-serif;
+  }
+
+  .menu-item .label{
+    opacity:1;
+    transform: translateX(0);
+    transition: none;
   }
 
   .menu-item .plus{
     font-size:34px;
     font-weight:bold;
-    font-family: 'ArialRoundedMTBold', sans-serif;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
     transition: transform 0.28s ease;
     display:inline-block;
   }
@@ -106,13 +105,11 @@
   .submenu .submenu-item{
     padding:8px 0 8px 18px;
     font-size:22px;
+    font-family: 'Fontspring DEMO Modica Thin', sans-serif;
     color:var(--black);
-    display: flex;
-    justify-content: space-between;
     opacity:0;
     transform: translateY(6px);
     transition: transform 0.35s ease, opacity 0.35s ease;
-    font-family: 'Fontspringregular', sans-serif;
   }
 
   .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
@@ -136,24 +133,52 @@
     </header>
 
     <nav class="menu">
+      <!-- Antipasti -->
       <div id="antipastiToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
         <span class="label" id="antipastiLabel">Antipasti</span>
         <span class="plus" id="antipastiPlus">+</span>
       </div>
-
       <div id="antipastiList" class="submenu" aria-hidden="true">
-        <div class="submenu-item"><span>Gulash</span><span>10€</span></div>
-        <div class="submenu-item"><span>Lumache</span><span>15€</span></div>
-        <div class="submenu-item"><span>Polipo Arrosto</span><span>13€</span></div>
-        <div class="submenu-item"><span>Cozze Fritte</span><span>10€</span></div>
-        <div class="submenu-item"><span>Verdure Grigliate</span><span>7€</span></div>
-        <div class="submenu-item"><span>Uccelletti</span><span>6€</span></div>
+        <div class="submenu-item">Gulash — 10€</div>
+        <div class="submenu-item">Lumache — 15€</div>
+        <div class="submenu-item">Polipo Arrosto — 13€</div>
+        <div class="submenu-item">Cozze Fritte — 10€</div>
+        <div class="submenu-item">Verdure Grigliate — 7€</div>
+        <div class="submenu-item">Uccelletti — 6€</div>
       </div>
 
+      <!-- Friggitoria -->
       <div class="menu-item"><span class="label">Friggitoria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Braceria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Pucceria</span><span class="plus">+</span></div>
+
+      <!-- Pizze -->
       <div class="menu-item"><span class="label">Pizze</span><span class="plus">+</span></div>
+
+      <!-- Pucce -->
+      <div class="menu-item"><span class="label">Pucce</span><span class="plus">+</span></div>
+
+      <!-- Taglieri -->
+      <div class="menu-item"><span class="label">Taglieri</span><span class="plus">+</span></div>
+
+      <!-- Braceria -->
+      <div class="menu-item"><span class="label">Braceria</span><span class="plus">+</span></div>
+
+      <!-- Bevande -->
+      <div class="menu-item"><span class="label">Bevande</span><span class="plus">+</span></div>
+
+      <!-- Cocktail -->
+      <div class="menu-item"><span class="label">Cocktail</span><span class="plus">+</span></div>
+
+      <!-- Birre -->
+      <div class="menu-item"><span class="label">Birre</span><span class="plus">+</span></div>
+
+      <!-- Vini -->
+      <div class="menu-item"><span class="label">Vini</span><span class="plus">+</span></div>
+
+      <!-- Caffè & Amari -->
+      <div class="menu-item"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
+
+      <!-- Dolci -->
+      <div class="menu-item"><span class="label">Dolci</span><span class="plus">+</span></div>
     </nav>
   </div>
   
