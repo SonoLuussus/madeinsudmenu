@@ -10,18 +10,26 @@
     --black: #000;
   }
 
-  /* Font piatti e testi */
+  /* Font titoli principali */
   @font-face{
-    font-family: 'Fontspring-DEMO-modica-bold';
+    font-family: 'FontspringBold';
     src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
 
-  /* Font per + e − */
+  /* Font simboli + e − */
   @font-face{
     font-family: 'ArialRoundedMTBold';
-    src: url('fonts/Arial Rounded MT Bold.ttf') format('opentype');
+    src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* Font voci sotto-menu */
+  @font-face{
+    font-family: 'FontspringThin';
+    src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
@@ -30,7 +38,7 @@
     height:100%;
     margin:0;
     background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
+    font-family: 'FontspringBold', sans-serif;
   }
 
   .phone{
@@ -68,12 +76,7 @@
     cursor:pointer;
     padding:8px 0;
     user-select:none;
-  }
-
-  .menu-item .label{
-    opacity:1;
-    transform: translateX(0);
-    transition: none;
+    font-family: 'FontspringBold', sans-serif;
   }
 
   .menu-item .plus{
@@ -109,6 +112,7 @@
     opacity:0;
     transform: translateY(6px);
     transition: transform 0.35s ease, opacity 0.35s ease;
+    font-family: 'FontspringThin', sans-serif;
   }
 
   .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
