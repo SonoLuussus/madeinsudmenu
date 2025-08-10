@@ -211,6 +211,7 @@
     item.addEventListener('click', () => {
       const targetId = item.getAttribute('data-target');
       const submenu = document.getElementById(targetId);
+      const logo = document.getElementById('mainLogo');
 
       // Chiudi tutte le altre
       document.querySelectorAll('.submenu').forEach(sm => {
@@ -226,10 +227,16 @@
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
+        logo.src = 'logo.png';
       } else {
         submenu.classList.add('open');
         item.classList.add('open');
         item.querySelector('.plus').textContent = '−';
+        if (targetId === 'antipastiList') {
+          logo.src = 'antipasti.png';
+        } else {
+          logo.src = 'logo.png';
+        }
       }
     });
   });
