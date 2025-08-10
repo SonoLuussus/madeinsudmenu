@@ -42,29 +42,39 @@
     box-sizing: border-box;
   }
 
-  /* LOGO con animazione fade + zoom */
+  /* LOGO + animazione */
   .logo {
     position: relative;
     overflow: hidden;
-    height: auto;
   }
 
   .logo img {
     width: 100%;
     height: auto;
     display: block;
+    transition: opacity 0.4s ease, transform 0.4s ease;
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0;
-    transform: scale(1.05);
-    transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
-  .logo img.visible {
-    opacity: 1;
-    transform: scale(1);
+  .logo img:first-child {
     position: relative;
+  }
+
+  @keyframes fadeScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .logo.animate img {
+    animation: fadeScale 0.4s ease forwards;
   }
 
   .menu {
@@ -139,8 +149,8 @@
 <body>
   <div class="phone">
     <header class="logo" id="logoWrapper">
-      <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza" class="visible">
-      <img id="tempLogo" src="" alt="">
+      <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
+      <img id="tempLogo" src="" alt="" style="opacity:0;">
     </header>
 
     <nav class="menu">
@@ -165,27 +175,32 @@
   </div>
 
 <script>
-  const mainLogo = document.getElementById("mainLogo");
+  const logoWrapper = document.getElementById("logoWrapper");
+  const logoImg = document.getElementById("mainLogo");
   const tempLogo = document.getElementById("tempLogo");
 
-  function fadeZoomLogo(newSrc) {
+  function crossfadeLogo(newSrc) {
     tempLogo.src = newSrc;
-    tempLogo.classList.remove("visible");
-    mainLogo.classList.remove("visible");
-
+    tempLogo.style.opacity = 0;
     tempLogo.style.zIndex = 2;
-    mainLogo.style.zIndex = 1;
+    logoImg.style.zIndex = 1;
 
-    // Forza un reflow per permettere la transizione
-    void tempLogo.offsetWidth;
-
-    tempLogo.classList.add("visible");
+    requestAnimationFrame(() => {
+      tempLogo.style.transition = "opacity 0.4s ease";
+      tempLogo.style.opacity = 1;
+      logoImg.style.opacity = 0;
+    });
 
     setTimeout(() => {
-      mainLogo.src = newSrc;
-      mainLogo.classList.add("visible");
-      tempLogo.classList.remove("visible");
-    }, 500);
+      logoImg.src = newSrc;
+      logoImg.style.opacity = 1;
+      tempLogo.style.opacity = 0;
+
+      logoWrapper.classList.add('animate');
+      setTimeout(() => {
+        logoWrapper.classList.remove('animate');
+      }, 400);
+    }, 400);
   }
 
   document.querySelectorAll('.menu-item').forEach(item => {
@@ -193,7 +208,7 @@
       const targetId = item.getAttribute('data-target');
       const submenu = document.getElementById(targetId);
 
-      // Chiudi altre
+      // Chiudi tutte le altre
       document.querySelectorAll('.submenu').forEach(sm => {
         if (sm !== submenu) {
           sm.classList.remove('open');
@@ -202,7 +217,7 @@
         }
       });
 
-      // Apri/chiudi selezionata
+      // Apri/chiudi la selezionata
       if (submenu.classList.contains('open')) {
         submenu.classList.remove('open');
         item.classList.remove('open');
@@ -213,7 +228,7 @@
         item.querySelector('.plus').textContent = '−';
 
         if (targetId === "antipastiList") {
-          fadeZoomLogo("antipasti.png");
+          crossfadeLogo("antipasti.png");
         }
       }
     });
