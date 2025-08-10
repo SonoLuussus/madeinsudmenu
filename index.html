@@ -207,6 +207,9 @@
   </div>
 
 <script>
+  const mainLogo = document.getElementById('mainLogo');
+  const defaultLogo = 'logo.png';
+
   document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', () => {
       const targetId = item.getAttribute('data-target');
@@ -214,7 +217,7 @@
 
       // Chiudi tutte le altre
       document.querySelectorAll('.submenu').forEach(sm => {
-        if(sm !== submenu){
+        if (sm !== submenu) {
           sm.classList.remove('open');
           sm.previousElementSibling.classList.remove('open');
           sm.previousElementSibling.querySelector('.plus').textContent = '+';
@@ -222,14 +225,24 @@
       });
 
       // Apri/chiudi la selezionata
-      if(submenu.classList.contains('open')){
+      if (submenu.classList.contains('open')) {
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
+
+        // Se era antipasti, torna al logo default
+        if (targetId === 'antipastiList') {
+          mainLogo.src = defaultLogo;
+        }
       } else {
         submenu.classList.add('open');
         item.classList.add('open');
         item.querySelector('.plus').textContent = '−';
+
+        // Se è antipasti, cambia logo
+        if (targetId === 'antipastiList') {
+          mainLogo.src = 'antipasti.png';
+        }
       }
     });
   });
