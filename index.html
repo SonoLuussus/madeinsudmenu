@@ -6,46 +6,142 @@
 <title>Made in Sud - Menu</title>
 
 <style>
-  :root { --black: #000; }
+  :root {
+    --black: #000;
+  }
+
   html, body {
-    height: 100%; margin: 0;
+    height: 100%;
+    margin: 0;
     background: url('sfondo.jpg') no-repeat center center/cover;
     font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
   }
 
-  @font-face { font-family: 'Fontspring-DEMO-modica-bold'; src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype'); }
-  @font-face { font-family: 'Fontspring-DEMO-modica-thin'; src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype'); }
-  @font-face { font-family: 'Fontspring-DEMO-modica-regular'; src: url('fonts/Fontspring-DEMO-modica-regular.otf') format('opentype'); }
-  @font-face { font-family: 'ArialRoundedMTBold'; src: url('fonts/Arial Rounded MT Bold.otf') format('opentype'); }
-
-  .phone { width: 390px; max-width: 100%; margin: 0 auto; padding: 18px; box-sizing: border-box; }
-
-  /* LOGO + animazione */
-  .logo { position: relative; overflow: hidden; }
-  .logo img { width: 100%; height: auto; display: block; transition: opacity 0.4s ease; position: absolute; top: 0; left: 0; }
-  .logo img:first-child { position: relative; }
-  .logo.animate img { animation: bounceFadeIn 0.65s ease-out; }
-  @keyframes bounceFadeIn {
-    0% { opacity: 0; transform: scale(0.8) rotate(-3deg); filter: blur(6px); }
-    60% { opacity: 1; transform: scale(1.05) rotate(2deg); filter: blur(0px); }
-    80% { transform: scale(0.97) rotate(-1deg); }
-    100% { transform: scale(1) rotate(0deg); }
+  @font-face {
+    font-family: 'Fontspring-DEMO-modica-bold';
+    src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'Fontspring-DEMO-modica-thin';
+    src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'Fontspring-DEMO-modica-regular';
+    src: url('fonts/Fontspring-DEMO-modica-regular.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'ArialRoundedMTBold';
+    src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
   }
 
-  .menu { margin-top: 38px; display: flex; flex-direction: column; gap: 18px; }
-  .menu-item { display: flex; justify-content: space-between; align-items: center; font-size: 34px; color: var(--black); cursor: pointer; padding: 8px 0; user-select: none; font-family: 'Fontspring-DEMO-modica-bold'; }
-  .menu-item .plus { font-family: 'ArialRoundedMTBold'; font-size: 34px; font-weight: bold; transition: transform 0.28s ease; display: inline-block; }
-  .menu-item.open .plus { transform: rotate(180deg); }
+  .phone {
+    width: 390px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 18px;
+    box-sizing: border-box;
+  }
 
-  .submenu { overflow: hidden; max-height: 0; opacity: 0; transform: translateY(-6px); transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease; }
-  .submenu.open { max-height: 500px; opacity: 1; transform: translateY(0); }
-  .submenu .submenu-item { padding: 8px 0 8px 18px; font-size: 22px; color: var(--black); opacity: 0; transform: translateY(6px); transition: transform 0.35s ease, opacity 0.35s ease; display: flex; justify-content: space-between; font-family: 'Fontspring-DEMO-modica-regular'; }
-  .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
+  /* LOGO + animazione */
+  .logo {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .logo img:first-child {
+    position: relative;
+  }
+
+  @keyframes bounceFadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) rotate(-3deg);
+      filter: blur(6px);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.05) rotate(2deg);
+      filter: blur(0px);
+    }
+    80% {
+      transform: scale(0.97) rotate(-1deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  .logo.bounce img {
+    animation: bounceFadeIn 0.65s ease-out;
+  }
+
+  .menu {
+    margin-top: 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 34px;
+    color: var(--black);
+    cursor: pointer;
+    padding: 8px 0;
+    user-select: none;
+    font-family: 'Fontspring-DEMO-modica-bold';
+  }
+
+  .menu-item .plus {
+    font-family: 'ArialRoundedMTBold';
+    font-size: 34px;
+    font-weight: bold;
+    transition: transform 0.28s ease;
+    display: inline-block;
+  }
+  .menu-item.open .plus {
+    transform: rotate(180deg);
+  }
+
+  .submenu {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
+  }
+  .submenu.open {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fade-in semplice per il testo */
+  .submenu .submenu-item {
+    padding: 8px 0 8px 18px;
+    font-size: 22px;
+    color: var(--black);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Fontspring-DEMO-modica-regular';
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .submenu.open .submenu-item {
+    opacity: 1;
+  }
 
   @media (max-width:420px) {
     .menu-item{ font-size:30px; }
@@ -63,9 +159,7 @@
 
     <nav class="menu">
       <!-- Antipasti -->
-      <div class="menu-item" data-target="antipastiList" data-logo="antipasti.png">
-        <span class="label">Antipasti</span><span class="plus">+</span>
-      </div>
+      <div class="menu-item" data-target="antipastiList"><span class="label">Antipasti</span><span class="plus">+</span></div>
       <div id="antipastiList" class="submenu">
         <div class="submenu-item"><span>Gulash</span><span>10€</span></div>
         <div class="submenu-item"><span>Lumache</span><span>15€</span></div>
@@ -76,9 +170,7 @@
       </div>
 
       <!-- Friggitoria -->
-      <div class="menu-item" data-target="friggitoriaList" data-logo="friggitoria.png">
-        <span class="label">Friggitoria</span><span class="plus">+</span>
-      </div>
+      <div class="menu-item" data-target="friggitoriaList"><span class="label">Friggitoria</span><span class="plus">+</span></div>
       <div id="friggitoriaList" class="submenu">
         <div class="submenu-item"><span>Supplì</span><span>2€</span></div>
         <div class="submenu-item"><span>Arancini</span><span>3€</span></div>
@@ -90,35 +182,41 @@
   const logoWrapper = document.getElementById("logoWrapper");
   const logoImg = document.getElementById("mainLogo");
   const tempLogo = document.getElementById("tempLogo");
-  const defaultLogo = "logo.png"; // logo di default
+  const defaultLogo = "logo.png";
 
   function crossfadeLogo(newSrc) {
     tempLogo.src = newSrc;
     tempLogo.style.opacity = 0;
+    tempLogo.style.filter = "blur(6px)";
     tempLogo.style.zIndex = 2;
     logoImg.style.zIndex = 1;
 
     requestAnimationFrame(() => {
-      tempLogo.style.transition = "opacity 0.4s ease";
+      tempLogo.style.transition = "opacity 0.4s ease, filter 0.4s ease";
       tempLogo.style.opacity = 1;
+      tempLogo.style.filter = "blur(0px)";
       logoImg.style.opacity = 0;
+      logoImg.style.filter = "blur(6px)";
     });
 
     setTimeout(() => {
       logoImg.src = newSrc;
       logoImg.style.opacity = 1;
+      logoImg.style.filter = "blur(0px)";
       tempLogo.style.opacity = 0;
-      logoWrapper.classList.add('animate');
-      setTimeout(() => logoWrapper.classList.remove('animate'), 400);
+
+      logoWrapper.classList.add('bounce');
+      setTimeout(() => {
+        logoWrapper.classList.remove('bounce');
+      }, 650);
     }, 400);
   }
 
   document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', () => {
-      const submenu = document.getElementById(item.dataset.target);
-      const logoFile = item.dataset.logo;
+      const targetId = item.getAttribute('data-target');
+      const submenu = document.getElementById(targetId);
 
-      // Chiudi tutte le altre categorie
       document.querySelectorAll('.submenu').forEach(sm => {
         if (sm !== submenu) {
           sm.classList.remove('open');
@@ -128,17 +226,21 @@
       });
 
       if (submenu.classList.contains('open')) {
-        // Chiudo categoria
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
-        if (logoFile) crossfadeLogo(defaultLogo);
+
+        if (targetId === "antipastiList") {
+          crossfadeLogo(defaultLogo);
+        }
       } else {
-        // Apro categoria
         submenu.classList.add('open');
         item.classList.add('open');
         item.querySelector('.plus').textContent = '−';
-        if (logoFile) crossfadeLogo(logoFile);
+
+        if (targetId === "antipastiList") {
+          crossfadeLogo("antipasti.png");
+        }
       }
     });
   });
