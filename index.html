@@ -6,104 +6,97 @@
 <title>Made in Sud - Menu</title>
 
 <style>
-  :root {
+  :root{
     --black: #000;
   }
 
-  html, body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden; /* blocca scroll pagina */
+  html,body{
+    height:100%;
+    margin:0;
     background: url('sfondo.jpg') no-repeat center center/cover;
     font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
   }
 
-  @font-face {
+  @font-face{
     font-family: 'Fontspring-DEMO-modica-bold';
     src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
   }
-  @font-face {
+  @font-face{
     font-family: 'Fontspring-DEMO-modica-thin';
     src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype');
   }
-  @font-face {
+  @font-face{
     font-family: 'Fontspring-DEMO-modica-regular';
     src: url('fonts/Fontspring-DEMO-modica-regular.otf') format('opentype');
   }
-  @font-face {
+  @font-face{
     font-family: 'ArialRoundedMTBold';
     src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
   }
 
-  .phone {
-    width: 390px;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 18px;
-    box-sizing: border-box;
-    height: 100vh;
-    overflow: hidden;
+  .phone{
+    width:390px;
+    max-width:100%;
+    margin:0 auto;
+    padding:18px;
+    box-sizing:border-box;
   }
 
-  .logo img {
-    width: 100%;
-    height: auto;
-    display: block;
+  .logo img{
+    width:100%;
+    height:auto;
+    display:block;
     transition: opacity 0.28s ease, transform 0.28s ease;
   }
 
-  .menu {
-    margin-top: 38px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    max-height: 100%;
-    overflow: visible;
+  .menu{
+    margin-top:38px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
   }
 
-  .menu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 34px;
-    color: var(--black);
-    cursor: pointer;
-    padding: 8px 0;
-    user-select: none;
+  .menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:34px;
+    color:var(--black);
+    cursor:pointer;
+    padding:8px 0;
+    user-select:none;
     font-family: 'Fontspring-DEMO-modica-bold';
   }
 
-  .menu-item .plus {
+  .menu-item .plus{
     font-family: 'ArialRoundedMTBold';
-    font-size: 34px;
-    font-weight: bold;
+    font-size:34px;
+    font-weight:bold;
     transition: transform 0.28s ease;
-    display: inline-block;
+    display:inline-block;
   }
-
-  .menu-item.open .plus {
+  .menu-item.open .plus{
     transform: rotate(180deg);
   }
 
-  .submenu {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
+  .submenu{
+    overflow:hidden;
+    max-height:0;
+    opacity:0;
     transform: translateY(-6px);
     transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
-
-  .submenu.open {
+  .submenu.open{
     max-height: 500px;
-    opacity: 1;
+    opacity:1;
     transform: translateY(0);
   }
 
-  .submenu .submenu-item {
-    padding: 8px 0 8px 18px;
-    font-size: 22px;
-    color: var(--black);
-    opacity: 0;
+  .submenu .submenu-item{
+    padding:8px 0 8px 18px;
+    font-size:22px;
+    color:var(--black);
+    opacity:0;
     transform: translateY(6px);
     transition: transform 0.35s ease, opacity 0.35s ease;
     display: flex;
@@ -111,17 +104,17 @@
     font-family: 'Fontspring-DEMO-modica-regular';
   }
 
-  .submenu.open .submenu-item:nth-child(1) { transition-delay: .04s; opacity: 1; transform: none; }
-  .submenu.open .submenu-item:nth-child(2) { transition-delay: .08s; opacity: 1; transform: none; }
-  .submenu.open .submenu-item:nth-child(3) { transition-delay: .12s; opacity: 1; transform: none; }
-  .submenu.open .submenu-item:nth-child(4) { transition-delay: .16s; opacity: 1; transform: none; }
-  .submenu.open .submenu-item:nth-child(5) { transition-delay: .20s; opacity: 1; transform: none; }
-  .submenu.open .submenu-item:nth-child(6) { transition-delay: .24s; opacity: 1; transform: none; }
+  .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
-  @media (max-width: 420px) {
-    .menu-item { font-size: 30px; }
-    .menu-item .plus { font-size: 30px; }
-    .submenu .submenu-item { font-size: 20px; }
+  @media (max-width:420px){
+    .menu-item{ font-size:30px; }
+    .menu-item .plus{ font-size:30px; }
+    .submenu .submenu-item{ font-size:20px; }
   }
 </style>
 </head>
@@ -219,31 +212,27 @@
       const targetId = item.getAttribute('data-target');
       const submenu = document.getElementById(targetId);
 
-      // Chiudi tutti gli altri submenu e togli la classe open dagli altri menu-item
+      // Chiudi tutte le altre
       document.querySelectorAll('.submenu').forEach(sm => {
-        if (sm !== submenu) {
+        if(sm !== submenu){
           sm.classList.remove('open');
-          const prevMenuItem = sm.previousElementSibling;
-          if(prevMenuItem && prevMenuItem.classList.contains('menu-item')){
-            prevMenuItem.classList.remove('open');
-            prevMenuItem.querySelector('.plus').textContent = '+';
-          }
+          sm.previousElementSibling.classList.remove('open');
+          sm.previousElementSibling.querySelector('.plus').textContent = '+';
         }
       });
 
-      // Toggle submenu selezionato
-      if (submenu.classList.contains('open')) {
+      // Apri/chiudi la selezionata
+      if(submenu.classList.contains('open')){
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
       } else {
         submenu.classList.add('open');
         item.classList.add('open');
-        item.querySelector('.plus').textContent = '-';
+        item.querySelector('.plus').textContent = '−';
       }
     });
   });
 </script>
-
 </body>
 </html>
