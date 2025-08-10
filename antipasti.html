@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Made in Sud - Menu</title>
+
+<style>
+  :root {
+    --white: #ffffff;
+    --black: #000000;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: url('sfondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .phone {
+    position: relative;
+    width: 390px;
+    max-width: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+    background: none;
+    overflow: hidden;
+  }
+
+  @font-face {
+    font-family: 'Modica Ultra';
+    src: url('fonts/ModicaUltra.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .menu {
+    margin-top: 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Modica Ultra', sans-serif;
+    font-size: 28px;
+    color: black;
+    cursor: pointer;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .plus {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .submenu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    margin-left: 10px;
+    padding-top: 5px;
+  }
+
+  .submenu span {
+    font-family: 'Modica Ultra', sans-serif;
+    font-size: 20px;
+    color: black;
+  }
+
+  .menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Modica Ultra', sans-serif;
+    font-size: 28px;
+    color: black;
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: 420px) {
+    .menu-item, .menu a { font-size: 24px; }
+    .plus { font-size: 24px; }
+    .submenu span { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+  <div class="phone">
+    <header class="logo">
+      <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
+    </header>
+    <nav class="menu">
+      <div id="antipastiToggle" class="menu-item">
+        <span>Antipasti</span>
+        <span class="plus" id="antipastiPlus">+</span>
+      </div>
+      <div class="submenu" id="antipastiList">
+        <span>Gulash</span>
+        <span>Lumache</span>
+        <span>Polipo Arrosto</span>
+        <span>Cozze Fritte</span>
+        <span>Piatto Verdure Grigliate</span>
+      </div>
+
+      <a href="friggitoria.html">
+        <span>Friggitoria</span>
+        <span class="plus">+</span>
+      </a>
+      <a href="braceria.html">
+        <span>Braceria</span>
+        <span class="plus">+</span>
+      </a>
+      <a href="pucceria.html">
+        <span>Pucceria</span>
+        <span class="plus">+</span>
+      </a>
+      <a href="pizze.html">
+        <span>Pizze</span>
+        <span class="plus">+</span>
+      </a>
+    </nav>
+  </div>
+
+<script>
+  const antipastiToggle = document.getElementById('antipastiToggle');
+  const antipastiList = document.getElementById('antipastiList');
+  const antipastiPlus = document.getElementById('antipastiPlus');
+  const mainLogo = document.getElementById('mainLogo');
+
+  antipastiToggle.addEventListener('click', () => {
+    const isOpen = antipastiList.style.display === 'flex';
+    if (isOpen) {
+      antipastiList.style.display = 'none';
+      antipastiPlus.textContent = '+';
+      mainLogo.src = 'logo.png';
+    } else {
+      antipastiList.style.display = 'flex';
+      antipastiPlus.textContent = '−';
+      mainLogo.src = 'Antipasti.png';
+    }
+  });
+</script>
+</body>
+</html>
