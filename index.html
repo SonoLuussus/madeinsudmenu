@@ -14,24 +14,20 @@
     height:100%;
     margin:0;
     background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Fontspring DEMO Modica Ultra', sans-serif;
+    font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
   }
 
   @font-face{
-    font-family: 'Fontspring DEMO Modica Ultra';
-    src: url('fonts/Fontspring-DEMO-modica-ultra.otf') format('opentype');
+    font-family: 'Fontspring-DEMO-modica-bold';
+    src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
   }
   @font-face{
-    font-family: 'Fontspring DEMO Modica Thin';
+    font-family: 'Fontspring-DEMO-modica-thin';
     src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype');
   }
   @font-face{
-    font-family: 'Arial Rounded MT Bold';
+    font-family: 'ArialRoundedMTBold';
     src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
-  }
-  @font-face{
-    font-family: 'Fontspring DEMO Modica Bold';
-    src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
   }
 
   .phone{
@@ -48,10 +44,6 @@
     display:block;
     transition: opacity 0.28s ease, transform 0.28s ease;
   }
-  .logo img.fading{
-    opacity:0;
-    transform: scale(0.985);
-  }
 
   .menu{
     margin-top:38px;
@@ -65,23 +57,17 @@
     justify-content:space-between;
     align-items:center;
     font-size:34px;
-    font-family: 'Fontspring DEMO Modica Bold', sans-serif;
     color:var(--black);
     cursor:pointer;
     padding:8px 0;
     user-select:none;
-  }
-
-  .menu-item .label{
-    opacity:1;
-    transform: translateX(0);
-    transition: none;
+    font-family: 'Fontspring-DEMO-modica-bold';
   }
 
   .menu-item .plus{
+    font-family: 'ArialRoundedMTBold';
     font-size:34px;
     font-weight:bold;
-    font-family: 'Arial Rounded MT Bold', sans-serif;
     transition: transform 0.28s ease;
     display:inline-block;
   }
@@ -105,11 +91,13 @@
   .submenu .submenu-item{
     padding:8px 0 8px 18px;
     font-size:22px;
-    font-family: 'Fontspring DEMO Modica Thin', sans-serif;
     color:var(--black);
     opacity:0;
     transform: translateY(6px);
     transition: transform 0.35s ease, opacity 0.35s ease;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Fontspring-DEMO-modica-thin';
   }
 
   .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
@@ -134,97 +122,113 @@
 
     <nav class="menu">
       <!-- Antipasti -->
-      <div id="antipastiToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
-        <span class="label" id="antipastiLabel">Antipasti</span>
-        <span class="plus" id="antipastiPlus">+</span>
-      </div>
-      <div id="antipastiList" class="submenu" aria-hidden="true">
-        <div class="submenu-item">Gulash — 10€</div>
-        <div class="submenu-item">Lumache — 15€</div>
-        <div class="submenu-item">Polipo Arrosto — 13€</div>
-        <div class="submenu-item">Cozze Fritte — 10€</div>
-        <div class="submenu-item">Verdure Grigliate — 7€</div>
-        <div class="submenu-item">Uccelletti — 6€</div>
+      <div class="menu-item" data-target="antipastiList"><span class="label">Antipasti</span><span class="plus">+</span></div>
+      <div id="antipastiList" class="submenu">
+        <div class="submenu-item"><span>Gulash</span><span>10€</span></div>
+        <div class="submenu-item"><span>Lumache</span><span>15€</span></div>
+        <div class="submenu-item"><span>Polipo Arrosto</span><span>13€</span></div>
+        <div class="submenu-item"><span>Cozze Fritte</span><span>10€</span></div>
+        <div class="submenu-item"><span>Verdure Grigliate</span><span>7€</span></div>
+        <div class="submenu-item"><span>Uccelletti</span><span>6€</span></div>
       </div>
 
       <!-- Friggitoria -->
-      <div class="menu-item"><span class="label">Friggitoria</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="friggitoriaList"><span class="label">Friggitoria</span><span class="plus">+</span></div>
+      <div id="friggitoriaList" class="submenu">
+        <div class="submenu-item"><span>Supplì</span><span>2€</span></div>
+        <div class="submenu-item"><span>Arancini</span><span>3€</span></div>
+      </div>
 
       <!-- Pizze -->
-      <div class="menu-item"><span class="label">Pizze</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="pizzeList"><span class="label">Pizze</span><span class="plus">+</span></div>
+      <div id="pizzeList" class="submenu">
+        <div class="submenu-item"><span>Margherita</span><span>5€</span></div>
+        <div class="submenu-item"><span>Diavola</span><span>7€</span></div>
+      </div>
 
       <!-- Pucce -->
-      <div class="menu-item"><span class="label">Pucce</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="pucceList"><span class="label">Pucce</span><span class="plus">+</span></div>
+      <div id="pucceList" class="submenu">
+        <div class="submenu-item"><span>Puccia Classica</span><span>5€</span></div>
+      </div>
 
       <!-- Taglieri -->
-      <div class="menu-item"><span class="label">Taglieri</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="taglieriList"><span class="label">Taglieri</span><span class="plus">+</span></div>
+      <div id="taglieriList" class="submenu">
+        <div class="submenu-item"><span>Tagliere Misto</span><span>12€</span></div>
+      </div>
 
       <!-- Braceria -->
-      <div class="menu-item"><span class="label">Braceria</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="braceriaList"><span class="label">Braceria</span><span class="plus">+</span></div>
+      <div id="braceriaList" class="submenu">
+        <div class="submenu-item"><span>Costata</span><span>20€</span></div>
+      </div>
 
       <!-- Bevande -->
-      <div class="menu-item"><span class="label">Bevande</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="bevandeList"><span class="label">Bevande</span><span class="plus">+</span></div>
+      <div id="bevandeList" class="submenu">
+        <div class="submenu-item"><span>Acqua</span><span>1€</span></div>
+      </div>
 
       <!-- Cocktail -->
-      <div class="menu-item"><span class="label">Cocktail</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="cocktailList"><span class="label">Cocktail</span><span class="plus">+</span></div>
+      <div id="cocktailList" class="submenu">
+        <div class="submenu-item"><span>Mojito</span><span>6€</span></div>
+      </div>
 
       <!-- Birre -->
-      <div class="menu-item"><span class="label">Birre</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="birreList"><span class="label">Birre</span><span class="plus">+</span></div>
+      <div id="birreList" class="submenu">
+        <div class="submenu-item"><span>Birra Artigianale</span><span>5€</span></div>
+      </div>
 
       <!-- Vini -->
-      <div class="menu-item"><span class="label">Vini</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="viniList"><span class="label">Vini</span><span class="plus">+</span></div>
+      <div id="viniList" class="submenu">
+        <div class="submenu-item"><span>Rosso della Casa</span><span>4€</span></div>
+      </div>
 
       <!-- Caffè & Amari -->
-      <div class="menu-item"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="caffeList"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
+      <div id="caffeList" class="submenu">
+        <div class="submenu-item"><span>Caffè</span><span>1€</span></div>
+      </div>
 
       <!-- Dolci -->
-      <div class="menu-item"><span class="label">Dolci</span><span class="plus">+</span></div>
+      <div class="menu-item" data-target="dolciList"><span class="label">Dolci</span><span class="plus">+</span></div>
+      <div id="dolciList" class="submenu">
+        <div class="submenu-item"><span>Tiramisù</span><span>4€</span></div>
+      </div>
     </nav>
   </div>
-  
+
 <script>
-  (function(){
-    const toggle = document.getElementById('antipastiToggle');
-    const plus = document.getElementById('antipastiPlus');
-    const submenu = document.getElementById('antipastiList');
-    const logo = document.getElementById('mainLogo');
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const targetId = item.getAttribute('data-target');
+      const submenu = document.getElementById(targetId);
 
-    function switchLogo(newSrc){
-      logo.classList.add('fading');
-      setTimeout(() => { logo.src = newSrc; }, 220);
-      setTimeout(() => { logo.classList.remove('fading'); }, 260);
-    }
+      // Chiudi tutte le altre
+      document.querySelectorAll('.submenu').forEach(sm => {
+        if(sm !== submenu){
+          sm.classList.remove('open');
+          sm.previousElementSibling.classList.remove('open');
+          sm.previousElementSibling.querySelector('.plus').textContent = '+';
+        }
+      });
 
-    function openMenu(){
-      toggle.classList.add('open');
-      submenu.classList.add('open');
-      plus.textContent = '−';
-      submenu.setAttribute('aria-hidden','false');
-      toggle.setAttribute('aria-expanded','true');
-      switchLogo('antipasti.png');
-    }
-
-    function closeMenu(){
-      toggle.classList.remove('open');
-      submenu.classList.remove('open');
-      plus.textContent = '+';
-      submenu.setAttribute('aria-hidden','true');
-      toggle.setAttribute('aria-expanded','false');
-      switchLogo('logo.png');
-    }
-
-    toggle.addEventListener('click', () => {
-      if(submenu.classList.contains('open')) closeMenu();
-      else openMenu();
-    });
-
-    toggle.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle.click();
+      // Apri/chiudi la selezionata
+      if(submenu.classList.contains('open')){
+        submenu.classList.remove('open');
+        item.classList.remove('open');
+        item.querySelector('.plus').textContent = '+';
+      } else {
+        submenu.classList.add('open');
+        item.classList.add('open');
+        item.querySelector('.plus').textContent = '−';
       }
     });
-  })();
+  });
 </script>
 </body>
 </html>
