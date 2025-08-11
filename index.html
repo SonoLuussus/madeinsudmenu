@@ -14,17 +14,21 @@
     height:100%;
     margin:0;
     background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Modica Ultra', sans-serif;
+    font-family: 'Orbiga', sans-serif;
+  }
+
+  @font-face{
+    font-family: 'Orbiga';
+    src: url('fonts/Orbiga.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
   }
 
   @font-face{
     font-family: 'Modica Ultra';
     src: url('fonts/ModicaUltra.ttf') format('truetype');
-  }
-
-  @font-face{
-    font-family: 'Orbiga';
-    src: url('fonts/orbiga.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
   }
 
   .phone{
@@ -58,11 +62,11 @@
     justify-content:space-between;
     align-items:center;
     font-size:34px;
-    font-family: 'Orbiga', sans-serif;
     color:var(--black);
     cursor:pointer;
     padding:8px 0;
     user-select:none;
+    font-family: 'Orbiga', sans-serif;
   }
 
   .menu-item .plus{
@@ -89,18 +93,23 @@
   }
 
   .submenu .submenu-item{
+    display: flex;
+    justify-content: space-between;
     padding:8px 0 8px 18px;
     font-size:22px;
     color:var(--black);
     opacity:0;
     transform: translateY(6px);
     transition: transform 0.35s ease, opacity 0.35s ease;
+    font-family: 'Modica Ultra', sans-serif;
   }
 
-  .submenu.open .submenu-item{
-    opacity:1;
-    transform:none;
-  }
+  .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
   @media (max-width:420px){
     .menu-item{ font-size:30px; }
@@ -115,75 +124,72 @@
       <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
     </header>
 
-    <nav class="menu" id="menuContainer">
-      <!-- Categorie generate da JS -->
+    <nav class="menu">
+      <!-- Antipasti -->
+      <div id="antipastiToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
+        <span>Antipasti</span>
+        <span class="plus" id="antipastiPlus">+</span>
+      </div>
+      <div id="antipastiList" class="submenu" aria-hidden="true">
+        <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
+        <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
+        <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
+        <div class="submenu-item"><span>Cozze Fritte</span><span>€7,50</span></div>
+        <div class="submenu-item"><span>Verdure Grigliate</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
+      </div>
+
+      <!-- Altre categorie -->
+      <div class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pucceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
     </nav>
   </div>
-
+  
 <script>
-  const categories = [
-    { name: "Antipasti", logo: "antipasti.png", items: ["Gulash", "Lumache", "Polipo Arrosto"] },
-    { name: "Friggitoria", logo: "friggitoria.png", items: ["Arancini", "Panzerotti", "Frittura Mista"] },
-    { name: "Pizze", logo: "pizze.png", items: ["Margherita", "Diavola", "Capricciosa"] },
-    { name: "Pucce", logo: "pucce.png", items: ["Puccia Prosciutto", "Puccia Vegetariana"] },
-    { name: "Taglieri", logo: "taglieri.png", items: ["Salumi Misti", "Formaggi"] },
-    { name: "Braceria", logo: "braceria.png", items: ["Costata", "Salsiccia", "Agnello"] },
-    { name: "Bevande", logo: "bevande.png", items: ["Acqua", "Coca Cola", "Fanta"] },
-    { name: "Cocktail", logo: "cocktail.png", items: ["Spritz", "Mojito", "Negroni"] },
-    { name: "Birre", logo: "birre.png", items: ["Ichnusa", "Peroni", "Heineken"] },
-    { name: "Vini", logo: "vini.png", items: ["Primitivo", "Negroamaro"] },
-    { name: "Caffè & Amari", logo: "caffe.png", items: ["Caffè", "Amaro del Capo"] },
-    { name: "Dolci", logo: "dolci.png", items: ["Tiramisù", "Panna Cotta"] }
-  ];
+  (function(){
+    const toggle = document.getElementById('antipastiToggle');
+    const plus = document.getElementById('antipastiPlus');
+    const submenu = document.getElementById('antipastiList');
+    const logo = document.getElementById('mainLogo');
 
-  const menuContainer = document.getElementById('menuContainer');
-  const logo = document.getElementById('mainLogo');
+    function switchLogo(newSrc){
+      logo.classList.add('fading');
+      setTimeout(() => { logo.src = newSrc; }, 220);
+      setTimeout(() => { logo.classList.remove('fading'); }, 260);
+    }
 
-  function switchLogo(newSrc){
-    logo.classList.add('fading');
-    setTimeout(() => { logo.src = newSrc; }, 220);
-    setTimeout(() => { logo.classList.remove('fading'); }, 260);
-  }
+    function openMenu(){
+      toggle.classList.add('open');
+      submenu.classList.add('open');
+      plus.textContent = '−';
+      submenu.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded','true');
+      switchLogo('antipasti.png');
+    }
 
-  categories.forEach(cat => {
-    const toggle = document.createElement('div');
-    toggle.className = 'menu-item';
-    toggle.innerHTML = `<span class="label">${cat.name}</span><span class="plus">+</span>`;
-    
-    const submenu = document.createElement('div');
-    submenu.className = 'submenu';
-    cat.items.forEach(item => {
-      const subItem = document.createElement('div');
-      subItem.className = 'submenu-item';
-      subItem.textContent = item;
-      submenu.appendChild(subItem);
-    });
+    function closeMenu(){
+      toggle.classList.remove('open');
+      submenu.classList.remove('open');
+      plus.textContent = '+';
+      submenu.setAttribute('aria-hidden','true');
+      toggle.setAttribute('aria-expanded','false');
+      switchLogo('logo.png');
+    }
 
     toggle.addEventListener('click', () => {
-      const isOpen = submenu.classList.contains('open');
-      document.querySelectorAll('.submenu').forEach(sm => sm.classList.remove('open'));
-      document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('open'));
-      document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
-
-      if (!isOpen) {
-        toggle.classList.add('open');
-        submenu.classList.add('open');
-        toggle.querySelector('.plus').textContent = '−';
-        switchLogo(cat.logo);
-      } else {
-        switchLogo('logo.png');
-      }
+      if(submenu.classList.contains('open')) closeMenu();
+      else openMenu();
     });
 
-    submenu.addEventListener('transitionend', () => {
-      if (!submenu.classList.contains('open')) {
-        switchLogo('logo.png');
+    toggle.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
       }
     });
-
-    menuContainer.appendChild(toggle);
-    menuContainer.appendChild(submenu);
-  });
+  })();
 </script>
 </body>
 </html>
