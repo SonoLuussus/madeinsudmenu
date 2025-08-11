@@ -19,7 +19,7 @@
 
   @font-face{
     font-family: 'Orbiga';
-    src: url('fonts/Orbiga.ttf') format('truetype');
+    src: url('fonts/orbiga.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -39,9 +39,17 @@
     box-sizing:border-box;
   }
 
+  /* Altezza fissa per evitare il salto del contenuto */
+  .logo {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .logo img{
-    width:100%;
-    height:auto;
+    max-height: 100%;
+    width: auto;
     display:block;
     transition: opacity 0.28s ease, transform 0.28s ease;
   }
@@ -118,135 +126,124 @@
   }
 </style>
 </head>
+
 <body>
-  <div class="phone">
-    <header class="logo">
-      <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
-    </header>
+<div class="phone">
+  <header class="logo">
+    <img id="mainLogo" src="logo.png" alt="Made in Sud">
+  </header>
+  <nav class="menu">
+    <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
+    <div class="submenu" id="antipastiList">
+      <div class="submenu-item"><span>Gulash</span></div>
+      <div class="submenu-item"><span>Lumache</span></div>
+      <div class="submenu-item"><span>Polipo Arrosto</span></div>
+      <div class="submenu-item"><span>Cozze Fritte</span></div>
+      <div class="submenu-item"><span>Piatto Verdure Grigliate</span></div>
+    </div>
 
-    <nav class="menu">
-      <!-- Antipasti -->
-      <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
-      <div id="antipastiList" class="submenu">
-        <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
-        <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
-        <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
-        <div class="submenu-item"><span>Cozze Fritte</span><span>€7,50</span></div>
-        <div class="submenu-item"><span>Verdure Grigliate</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
-      </div>
+    <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+    <div class="submenu" id="friggitoriaList">
+      <div class="submenu-item"><span>Patata media</span><span>6.00</span></div>
+      <div class="submenu-item"><span>Patata grande</span><span>8.00</span></div>
+      <div class="submenu-item"><span>Crocchette di patate</span><span>5.00</span></div>
+      <div class="submenu-item"><span>Polpette fritte</span><span>6.00</span></div>
+      <div class="submenu-item"><span>Crocchette di pollo</span><span>6.00</span></div>
+      <div class="submenu-item"><span>Anelli di pollo</span><span>7.00</span></div>
+      <div class="submenu-item"><span>Alette di pollo</span><span>7.00</span></div>
+      <div class="submenu-item"><span>Frittura sfiziosa</span><span>14.00</span></div>
+    </div>
 
-      <!-- Friggitoria -->
-      <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
-      <div id="friggitoriaList" class="submenu">
-        <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Patata grande</span><span>€8,00</span></div>
-        <div class="submenu-item"><span>Crocchette di patate</span><span>€5,00</span></div>
-        <div class="submenu-item"><span>Polpette fritte</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Crocchette di pollo</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Anelli di pollo</span><span>€7,00</span></div>
-        <div class="submenu-item"><span>Alette di pollo</span><span>€7,00</span></div>
-        <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
-      </div>
+    <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
+    <div class="submenu" id="pizzeList"></div>
 
-      <!-- Pizze -->
-      <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
-      <div id="pizzeList" class="submenu"></div>
+    <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
+    <div class="submenu" id="pucceList"></div>
 
-      <!-- Pucce -->
-      <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
-      <div id="pucceList" class="submenu"></div>
+    <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
+    <div class="submenu" id="taglieriList"></div>
 
-      <!-- Taglieri -->
-      <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
-      <div id="taglieriList" class="submenu"></div>
+    <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+    <div class="submenu" id="braceriaList"></div>
 
-      <!-- Braceria -->
-      <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
-      <div id="braceriaList" class="submenu"></div>
+    <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
+    <div class="submenu" id="bevandeList"></div>
 
-      <!-- Bevande -->
-      <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
-      <div id="bevandeList" class="submenu"></div>
+    <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
+    <div class="submenu" id="cocktailList"></div>
 
-      <!-- Cocktail -->
-      <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
-      <div id="cocktailList" class="submenu"></div>
+    <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
+    <div class="submenu" id="birreList"></div>
 
-      <!-- Birre -->
-      <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
-      <div id="birreList" class="submenu"></div>
+    <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
+    <div class="submenu" id="viniList"></div>
 
-      <!-- Vini -->
-      <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
-      <div id="viniList" class="submenu"></div>
+    <div id="caffeToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
+    <div class="submenu" id="caffeList"></div>
 
-      <!-- Caffè & Amari -->
-      <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
-      <div id="caffeamariList" class="submenu"></div>
+    <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
+    <div class="submenu" id="dolciList"></div>
+  </nav>
+</div>
 
-      <!-- Dolci -->
-      <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
-      <div id="dolciList" class="submenu"></div>
-    </nav>
-  </div>
-  
 <script>
-(function(){
-  const defaultLogo = 'logo.png';
-  const logo = document.getElementById('mainLogo');
+const categories = [
+  { toggle: 'antipastiToggle', list: 'antipastiList', img: 'Antipasti.png' },
+  { toggle: 'friggitoriaToggle', list: 'friggitoriaList', img: 'Friggitoria.png' },
+  { toggle: 'pizzeToggle', list: 'pizzeList', img: 'Pizze.png' },
+  { toggle: 'pucceToggle', list: 'pucceList', img: 'Pucce.png' },
+  { toggle: 'taglieriToggle', list: 'taglieriList', img: 'Taglieri.png' },
+  { toggle: 'braceriaToggle', list: 'braceriaList', img: 'Braceria.png' },
+  { toggle: 'bevandeToggle', list: 'bevandeList', img: 'Bevande.png' },
+  { toggle: 'cocktailToggle', list: 'cocktailList', img: 'Cocktail.png' },
+  { toggle: 'birreToggle', list: 'birreList', img: 'Birre.png' },
+  { toggle: 'viniToggle', list: 'viniList', img: 'Vini.png' },
+  { toggle: 'caffeToggle', list: 'caffeList', img: 'CaffeAmari.png' },
+  { toggle: 'dolciToggle', list: 'dolciList', img: 'Dolci.png' }
+];
 
-  function switchLogo(newSrc){
-    logo.classList.add('fading');
-    setTimeout(() => { logo.src = newSrc; }, 220);
-    setTimeout(() => { logo.classList.remove('fading'); }, 260);
-  }
+const mainLogo = document.getElementById('mainLogo');
+let openCategory = null;
 
-  function setupAccordion(id, logoSrc){
-    const toggle = document.getElementById(id + 'Toggle');
-    const submenu = document.getElementById(id + 'List');
-    const plus = toggle.querySelector('.plus');
+categories.forEach(cat => {
+  const toggleEl = document.getElementById(cat.toggle);
+  const listEl = document.getElementById(cat.list);
+  const plusEl = toggleEl.querySelector('.plus');
 
-    toggle.addEventListener('mousedown', e => e.preventDefault());
+  toggleEl.addEventListener('click', () => {
+    const isOpen = listEl.classList.contains('open');
 
-    toggle.addEventListener('click', () => {
-      const isOpen = submenu.classList.contains('open');
+    document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('open'));
 
-      document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
-      document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
-      document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
+    if (!isOpen) {
+      listEl.classList.add('open');
+      toggleEl.classList.add('open');
+      plusEl.textContent = '−';
+      changeLogo(cat.img);
+      openCategory = cat;
+    } else {
+      plusEl.textContent = '+';
+      changeLogo('logo.png');
+      openCategory = null;
+    }
 
-      if(!isOpen){
-        submenu.classList.add('open');
-        toggle.classList.add('open');
-        plus.textContent = '−';
-        switchLogo(logoSrc);
-      } else {
-        switchLogo(defaultLogo);
+    document.querySelectorAll('.menu-item').forEach(mi => {
+      if (mi !== toggleEl) {
+        const plus = mi.querySelector('.plus');
+        if (plus) plus.textContent = '+';
       }
     });
+  });
+});
 
-    toggle.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle.click();
-      }
-    });
-  }
-
-  setupAccordion('antipasti', 'antipasti.png');
-  setupAccordion('friggitoria', 'friggitoria.png');
-  setupAccordion('pizze', 'pizze.png');
-  setupAccordion('pucce', 'pucce.png');
-  setupAccordion('taglieri', 'taglieri.png');
-  setupAccordion('braceria', 'braceria.png');
-  setupAccordion('bevande', 'bevande.png');
-  setupAccordion('cocktail', 'cocktail.png');
-  setupAccordion('birre', 'birre.png');
-  setupAccordion('vini', 'vini.png');
-  setupAccordion('caffeamari', 'caffeamari.png');
-  setupAccordion('dolci', 'dolci.png');
-})();
+function changeLogo(src) {
+  mainLogo.classList.add('fading');
+  setTimeout(() => {
+    mainLogo.src = src;
+    mainLogo.classList.remove('fading');
+  }, 280);
+}
 </script>
 </body>
 </html>
