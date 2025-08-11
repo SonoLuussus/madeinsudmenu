@@ -46,7 +46,10 @@
     width:100%;
     height:auto;
     display:block;
-    transition: opacity 0.28s ease, transform 0.28s ease;
+    transition: opacity 0.4s ease; /* dissolvenza */
+  }
+  .logo.fade-out img{
+    opacity:0;
   }
 
   .menu{
@@ -120,7 +123,7 @@
 </head>
 <body>
   <div class="phone">
-    <header class="logo">
+    <header class="logo" id="logoContainer">
       <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
     </header>
 
@@ -207,11 +210,13 @@
   </div>
 
 <script>
+  const logo = document.getElementById('mainLogo');
+  const logoContainer = document.getElementById('logoContainer');
+
   document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', () => {
       const targetId = item.getAttribute('data-target');
       const submenu = document.getElementById(targetId);
-      const logo = document.getElementById('mainLogo');
 
       // Chiudi tutte le altre
       document.querySelectorAll('.submenu').forEach(sm => {
@@ -227,19 +232,27 @@
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
-        logo.src = 'logo.png';
+        changeLogo('logo.png');
       } else {
         submenu.classList.add('open');
         item.classList.add('open');
         item.querySelector('.plus').textContent = '−';
         if (targetId === 'antipastiList') {
-          logo.src = 'antipasti.png';
+          changeLogo('antipasti.png');
         } else {
-          logo.src = 'logo.png';
+          changeLogo('logo.png');
         }
       }
     });
   });
+
+  function changeLogo(newSrc) {
+    logoContainer.classList.add('fade-out');
+    setTimeout(() => {
+      logo.src = newSrc;
+      logoContainer.classList.remove('fade-out');
+    }, 400);
+  }
 </script>
 </body>
 </html>
