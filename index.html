@@ -17,13 +17,10 @@
     font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
   }
 
+  /* Fonts */
   @font-face{
     font-family: 'Fontspring-DEMO-modica-bold';
     src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
-  }
-  @font-face{
-    font-family: 'Fontspring-DEMO-modica-thin';
-    src: url('fonts/Fontspring-DEMO-modica-thin.otf') format('opentype');
   }
   @font-face{
     font-family: 'Fontspring-DEMO-modica-regular';
@@ -46,18 +43,21 @@
     box-sizing:border-box;
   }
 
+  /* LOGO + dissolvenza/scale */
   .logo img{
     width:100%;
     height:auto;
     display:block;
     transition: opacity 0.28s ease, transform 0.28s ease;
+    /* stato iniziale (visibile) */
+    opacity: 1;
+    transform: scale(1);
   }
-
-  .fade-out {
+  .logo img.fade-out{
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.985);
   }
-  .fade-in {
+  .logo img.fade-in{
     opacity: 1;
     transform: scale(1);
   }
@@ -69,6 +69,7 @@
     gap:18px;
   }
 
+  /* categorie (titoli) con font Orbiga */
   .menu-item{
     display:flex;
     justify-content:space-between;
@@ -92,6 +93,7 @@
     transform: rotate(180deg);
   }
 
+  /* Submenu (effetto tendina + fade degli elementi a cascata) */
   .submenu{
     overflow:hidden;
     max-height:0;
@@ -100,7 +102,7 @@
     transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
   .submenu.open{
-    max-height: 500px;
+    max-height: 800px; /* abbondante per contenere tutti gli elementi */
     opacity:1;
     transform: translateY(0);
   }
@@ -117,12 +119,14 @@
     font-family: 'Fontspring-DEMO-modica-regular';
   }
 
+  /* ritardi per effetto a cascata */
   .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(7){ transition-delay: .28s; opacity:1; transform:none; }
 
   @media (max-width:420px){
     .menu-item{ font-size:30px; }
@@ -154,58 +158,141 @@
       <div id="friggitoriaList" class="submenu">
         <div class="submenu-item"><span>Supplì</span><span>2€</span></div>
         <div class="submenu-item"><span>Arancini</span><span>3€</span></div>
+        <div class="submenu-item"><span>Pizza fritta</span><span>4€</span></div>
+      </div>
+
+      <!-- Pizze -->
+      <div class="menu-item" data-target="pizzeList"><span class="label">Pizze</span><span class="plus">+</span></div>
+      <div id="pizzeList" class="submenu">
+        <div class="submenu-item"><span>Margherita</span><span>5€</span></div>
+        <div class="submenu-item"><span>Diavola</span><span>7€</span></div>
+        <div class="submenu-item"><span>Capricciosa</span><span>10€</span></div>
+      </div>
+
+      <!-- Pucce -->
+      <div class="menu-item" data-target="pucceList"><span class="label">Pucce</span><span class="plus">+</span></div>
+      <div id="pucceList" class="submenu">
+        <div class="submenu-item"><span>Puccia Classica</span><span>5€</span></div>
+        <div class="submenu-item"><span>Puccia con capocollo</span><span>7€</span></div>
+      </div>
+
+      <!-- Taglieri -->
+      <div class="menu-item" data-target="taglieriList"><span class="label">Taglieri</span><span class="plus">+</span></div>
+      <div id="taglieriList" class="submenu">
+        <div class="submenu-item"><span>Tagliere Misto</span><span>12€</span></div>
+        <div class="submenu-item"><span>Tagliere Formaggi</span><span>11€</span></div>
+      </div>
+
+      <!-- Braceria -->
+      <div class="menu-item" data-target="braceriaList"><span class="label">Braceria</span><span class="plus">+</span></div>
+      <div id="braceriaList" class="submenu">
+        <div class="submenu-item"><span>Costata</span><span>20€</span></div>
+        <div class="submenu-item"><span>Salsiccia alla brace</span><span>9€</span></div>
+      </div>
+
+      <!-- Bevande -->
+      <div class="menu-item" data-target="bevandeList"><span class="label">Bevande</span><span class="plus">+</span></div>
+      <div id="bevandeList" class="submenu">
+        <div class="submenu-item"><span>Acqua 0,5 L</span><span>1€</span></div>
+        <div class="submenu-item"><span>Coca-Cola</span><span>3€</span></div>
+      </div>
+
+      <!-- Cocktail -->
+      <div class="menu-item" data-target="cocktailList"><span class="label">Cocktail</span><span class="plus">+</span></div>
+      <div id="cocktailList" class="submenu">
+        <div class="submenu-item"><span>Aperol Spritz</span><span>5€</span></div>
+        <div class="submenu-item"><span>Mojito</span><span>6€</span></div>
+      </div>
+
+      <!-- Birre -->
+      <div class="menu-item" data-target="birreList"><span class="label">Birre</span><span class="plus">+</span></div>
+      <div id="birreList" class="submenu">
+        <div class="submenu-item"><span>Birra alla spina</span><span>4€</span></div>
+        <div class="submenu-item"><span>Birra artigianale</span><span>5€</span></div>
+      </div>
+
+      <!-- Vini -->
+      <div class="menu-item" data-target="viniList"><span class="label">Vini</span><span class="plus">+</span></div>
+      <div id="viniList" class="submenu">
+        <div class="submenu-item"><span>Rosso della Casa</span><span>4€</span></div>
+        <div class="submenu-item"><span>Bianco secco</span><span>5€</span></div>
+      </div>
+
+      <!-- Caffè & Amari -->
+      <div class="menu-item" data-target="caffeList"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
+      <div id="caffeList" class="submenu">
+        <div class="submenu-item"><span>Caffè espresso</span><span>1€</span></div>
+        <div class="submenu-item"><span>Amaro della casa</span><span>3€</span></div>
+      </div>
+
+      <!-- Dolci -->
+      <div class="menu-item" data-target="dolciList"><span class="label">Dolci</span><span class="plus">+</span></div>
+      <div id="dolciList" class="submenu">
+        <div class="submenu-item"><span>Tiramisù</span><span>4€</span></div>
+        <div class="submenu-item"><span>Gelato artigianale</span><span>3€</span></div>
       </div>
     </nav>
   </div>
 
 <script>
+  const logo = document.getElementById('mainLogo');
+
   document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', () => {
       const targetId = item.getAttribute('data-target');
       const submenu = document.getElementById(targetId);
-      const logo = document.getElementById('mainLogo');
 
       // Chiudi tutte le altre
       document.querySelectorAll('.submenu').forEach(sm => {
         if(sm !== submenu){
           sm.classList.remove('open');
-          sm.previousElementSibling.classList.remove('open');
-          sm.previousElementSibling.querySelector('.plus').textContent = '+';
+          // togli stato "open" dalla voce corrispondente
+          const prev = sm.previousElementSibling;
+          if(prev && prev.classList.contains('open')) prev.classList.remove('open');
+          if(prev && prev.querySelector('.plus')) prev.querySelector('.plus').textContent = '+';
         }
       });
 
       // Apri/chiudi la selezionata
       if(submenu.classList.contains('open')){
+        // chiudi
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
-
-        // Animazione cambio logo a default
-        logo.classList.add('fade-out');
-        setTimeout(() => {
-          logo.src = 'logo.png';
-          logo.classList.remove('fade-out');
-          logo.classList.add('fade-in');
-          setTimeout(() => logo.classList.remove('fade-in'), 280);
-        }, 280);
-
+        // se stiamo chiudendo Antipasti, torna logo di default con dissolvenza
+        if(targetId === 'antipastiList'){
+          logo.classList.add('fade-out');
+          setTimeout(() => {
+            logo.src = 'logo.png';
+            logo.classList.remove('fade-out');
+            logo.classList.add('fade-in');
+            setTimeout(() => logo.classList.remove('fade-in'), 300);
+          }, 300);
+        }
       } else {
+        // apro
         submenu.classList.add('open');
         item.classList.add('open');
         item.querySelector('.plus').textContent = '−';
-
-        // Animazione cambio logo
-        logo.classList.add('fade-out');
-        setTimeout(() => {
-          if (targetId === 'antipastiList') {
+        // se apriamo Antipasti, cambia logo in antipasti.png con dissolvenza
+        if(targetId === 'antipastiList'){
+          logo.classList.add('fade-out');
+          setTimeout(() => {
             logo.src = 'antipasti.png';
-          } else {
+            logo.classList.remove('fade-out');
+            logo.classList.add('fade-in');
+            setTimeout(() => logo.classList.remove('fade-in'), 300);
+          }, 300);
+        } else {
+          // per le altre categorie lasciamo il logo di default (se vuoi: possiamo evitare animazione)
+          logo.classList.add('fade-out');
+          setTimeout(() => {
             logo.src = 'logo.png';
-          }
-          logo.classList.remove('fade-out');
-          logo.classList.add('fade-in');
-          setTimeout(() => logo.classList.remove('fade-in'), 280);
-        }, 280);
+            logo.classList.remove('fade-out');
+            logo.classList.add('fade-in');
+            setTimeout(() => logo.classList.remove('fade-in'), 300);
+          }, 300);
+        }
       }
     });
   });
