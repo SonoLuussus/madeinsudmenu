@@ -69,12 +69,6 @@
     font-family: 'Orbiga', sans-serif;
   }
 
-  .menu-item .label{
-    opacity:1;
-    transform: translateX(0);
-    transition: none;
-  }
-
   .menu-item .plus{
     font-size:34px;
     font-weight:bold;
@@ -99,6 +93,8 @@
   }
 
   .submenu .submenu-item{
+    display: flex;
+    justify-content: space-between;
     padding:8px 0 8px 18px;
     font-size:22px;
     color:var(--black);
@@ -129,24 +125,25 @@
     </header>
 
     <nav class="menu">
+      <!-- Antipasti -->
       <div id="antipastiToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
-        <span class="label" id="antipastiLabel">Antipasti</span>
+        <span>Antipasti</span>
         <span class="plus" id="antipastiPlus">+</span>
       </div>
-
       <div id="antipastiList" class="submenu" aria-hidden="true">
-        <div class="submenu-item">Gulash -------------------- €8,00</div>
-        <div class="submenu-item">Lumache ------------------ €10,00</div>
-        <div class="submenu-item">Polipo Arrosto ----------- €12,00</div>
-        <div class="submenu-item">Cozze Fritte ------------- €7,50</div>
-        <div class="submenu-item">Verdure Grigliate -------- €6,00</div>
-        <div class="submenu-item">Uccelletti --------------- €9,00</div>
+        <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
+        <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
+        <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
+        <div class="submenu-item"><span>Cozze Fritte</span><span>€7,50</span></div>
+        <div class="submenu-item"><span>Verdure Grigliate</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
       </div>
 
-      <div class="menu-item"><span class="label">Friggitoria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Braceria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Pucceria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span class="label">Pizze</span><span class="plus">+</span></div>
+      <!-- Altre categorie -->
+      <div class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pucceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
     </nav>
   </div>
   
