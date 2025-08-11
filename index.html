@@ -110,6 +110,8 @@
   .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(7){ transition-delay: .28s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(8){ transition-delay: .32s; opacity:1; transform:none; }
 
   @media (max-width:420px){
     .menu-item{ font-size:30px; }
@@ -139,18 +141,26 @@
         <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
       </div>
 
+      <!-- Friggitoria -->
+      <div id="friggitoriaToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
+        <span>Friggitoria</span>
+        <span class="plus" id="friggitoriaPlus">+</span>
+      </div>
+      <div id="friggitoriaList" class="submenu" aria-hidden="true">
+        <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Patata grande</span><span>€8,00</span></div>
+        <div class="submenu-item"><span>Crocchette di patate</span><span>€5,00</span></div>
+        <div class="submenu-item"><span>Polpette fritte</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Crocchette di pollo</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Anelli di pollo</span><span>€7,00</span></div>
+        <div class="submenu-item"><span>Alette di pollo</span><span>€7,00</span></div>
+        <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
+      </div>
+
       <!-- Altre categorie -->
-      <div class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
       <div class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Birre</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Vini</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pucceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
     </nav>
   </div>
   
@@ -160,6 +170,10 @@
     const plus = document.getElementById('antipastiPlus');
     const submenu = document.getElementById('antipastiList');
     const logo = document.getElementById('mainLogo');
+
+    const friggitoriaToggle = document.getElementById('friggitoriaToggle');
+    const friggitoriaPlus = document.getElementById('friggitoriaPlus');
+    const friggitoriaList = document.getElementById('friggitoriaList');
 
     function switchLogo(newSrc){
       logo.classList.add('fading');
@@ -185,6 +199,24 @@
       switchLogo('logo.png');
     }
 
+    function openFriggitoria(){
+      friggitoriaToggle.classList.add('open');
+      friggitoriaList.classList.add('open');
+      friggitoriaPlus.textContent = '−';
+      friggitoriaList.setAttribute('aria-hidden','false');
+      friggitoriaToggle.setAttribute('aria-expanded','true');
+      switchLogo('friggitoria.png');
+    }
+
+    function closeFriggitoria(){
+      friggitoriaToggle.classList.remove('open');
+      friggitoriaList.classList.remove('open');
+      friggitoriaPlus.textContent = '+';
+      friggitoriaList.setAttribute('aria-hidden','true');
+      friggitoriaToggle.setAttribute('aria-expanded','false');
+      switchLogo('logo.png');
+    }
+
     toggle.addEventListener('click', () => {
       if(submenu.classList.contains('open')) closeMenu();
       else openMenu();
@@ -194,6 +226,18 @@
       if(e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         toggle.click();
+      }
+    });
+
+    friggitoriaToggle.addEventListener('click', () => {
+      if(friggitoriaList.classList.contains('open')) closeFriggitoria();
+      else openFriggitoria();
+    });
+
+    friggitoriaToggle.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        friggitoriaToggle.click();
       }
     });
   })();
