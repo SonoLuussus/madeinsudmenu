@@ -110,8 +110,6 @@
   .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(7){ transition-delay: .28s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(8){ transition-delay: .32s; opacity:1; transform:none; }
 
   @media (max-width:420px){
     .menu-item{ font-size:30px; }
@@ -128,11 +126,8 @@
 
     <nav class="menu">
       <!-- Antipasti -->
-      <div id="antipastiToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
-        <span>Antipasti</span>
-        <span class="plus" id="antipastiPlus">+</span>
-      </div>
-      <div id="antipastiList" class="submenu" aria-hidden="true">
+      <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
+      <div id="antipastiList" class="submenu">
         <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
         <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
         <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
@@ -142,11 +137,8 @@
       </div>
 
       <!-- Friggitoria -->
-      <div id="friggitoriaToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
-        <span>Friggitoria</span>
-        <span class="plus" id="friggitoriaPlus">+</span>
-      </div>
-      <div id="friggitoriaList" class="submenu" aria-hidden="true">
+      <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+      <div id="friggitoriaList" class="submenu">
         <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
         <div class="submenu-item"><span>Patata grande</span><span>€8,00</span></div>
         <div class="submenu-item"><span>Crocchette di patate</span><span>€5,00</span></div>
@@ -157,23 +149,52 @@
         <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
       </div>
 
-      <!-- Altre categorie -->
-      <div class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Pucceria</span><span class="plus">+</span></div>
-      <div class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
+      <!-- Pizze -->
+      <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
+      <div id="pizzeList" class="submenu"></div>
+
+      <!-- Pucce -->
+      <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
+      <div id="pucceList" class="submenu"></div>
+
+      <!-- Taglieri -->
+      <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
+      <div id="taglieriList" class="submenu"></div>
+
+      <!-- Braceria -->
+      <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+      <div id="braceriaList" class="submenu"></div>
+
+      <!-- Bevande -->
+      <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
+      <div id="bevandeList" class="submenu"></div>
+
+      <!-- Cocktail -->
+      <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
+      <div id="cocktailList" class="submenu"></div>
+
+      <!-- Birre -->
+      <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
+      <div id="birreList" class="submenu"></div>
+
+      <!-- Vini -->
+      <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
+      <div id="viniList" class="submenu"></div>
+
+      <!-- Caffè & Amari -->
+      <div id="caffeToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
+      <div id="caffeList" class="submenu"></div>
+
+      <!-- Dolci -->
+      <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
+      <div id="dolciList" class="submenu"></div>
     </nav>
   </div>
   
 <script>
   (function(){
-    const toggle = document.getElementById('antipastiToggle');
-    const plus = document.getElementById('antipastiPlus');
-    const submenu = document.getElementById('antipastiList');
     const logo = document.getElementById('mainLogo');
-
-    const friggitoriaToggle = document.getElementById('friggitoriaToggle');
-    const friggitoriaPlus = document.getElementById('friggitoriaPlus');
-    const friggitoriaList = document.getElementById('friggitoriaList');
+    const defaultLogo = 'logo.png';
 
     function switchLogo(newSrc){
       logo.classList.add('fading');
@@ -181,65 +202,40 @@
       setTimeout(() => { logo.classList.remove('fading'); }, 260);
     }
 
-    function openMenu(){
-      toggle.classList.add('open');
-      submenu.classList.add('open');
-      plus.textContent = '−';
-      submenu.setAttribute('aria-hidden','false');
-      toggle.setAttribute('aria-expanded','true');
-      switchLogo('antipasti.png');
+    function setupAccordion(id, logoSrc){
+      const toggle = document.getElementById(id + 'Toggle');
+      const submenu = document.getElementById(id + 'List');
+      const plus = toggle.querySelector('.plus');
+
+      toggle.addEventListener('click', () => {
+        const isOpen = submenu.classList.contains('open');
+        document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
+        document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
+        
+        if(!isOpen){
+          submenu.classList.add('open');
+          toggle.classList.add('open');
+          plus.textContent = '−';
+          switchLogo(logoSrc);
+        } else {
+          switchLogo(defaultLogo);
+        }
+      });
     }
 
-    function closeMenu(){
-      toggle.classList.remove('open');
-      submenu.classList.remove('open');
-      plus.textContent = '+';
-      submenu.setAttribute('aria-hidden','true');
-      toggle.setAttribute('aria-expanded','false');
-      switchLogo('logo.png');
-    }
-
-    function openFriggitoria(){
-      friggitoriaToggle.classList.add('open');
-      friggitoriaList.classList.add('open');
-      friggitoriaPlus.textContent = '−';
-      friggitoriaList.setAttribute('aria-hidden','false');
-      friggitoriaToggle.setAttribute('aria-expanded','true');
-      switchLogo('friggitoria.png');
-    }
-
-    function closeFriggitoria(){
-      friggitoriaToggle.classList.remove('open');
-      friggitoriaList.classList.remove('open');
-      friggitoriaPlus.textContent = '+';
-      friggitoriaList.setAttribute('aria-hidden','true');
-      friggitoriaToggle.setAttribute('aria-expanded','false');
-      switchLogo('logo.png');
-    }
-
-    toggle.addEventListener('click', () => {
-      if(submenu.classList.contains('open')) closeMenu();
-      else openMenu();
-    });
-
-    toggle.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle.click();
-      }
-    });
-
-    friggitoriaToggle.addEventListener('click', () => {
-      if(friggitoriaList.classList.contains('open')) closeFriggitoria();
-      else openFriggitoria();
-    });
-
-    friggitoriaToggle.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        friggitoriaToggle.click();
-      }
-    });
+    setupAccordion('antipasti', 'antipasti.png');
+    setupAccordion('friggitoria', 'friggitoria.png');
+    setupAccordion('pizze', 'pizze.png');
+    setupAccordion('pucce', 'pucce.png');
+    setupAccordion('taglieri', 'taglieri.png');
+    setupAccordion('braceria', 'braceria.png');
+    setupAccordion('bevande', 'bevande.png');
+    setupAccordion('cocktail', 'cocktail.png');
+    setupAccordion('birre', 'birre.png');
+    setupAccordion('vini', 'vini.png');
+    setupAccordion('caffe', 'caffe.png');
+    setupAccordion('dolci', 'dolci.png');
   })();
 </script>
 </body>
