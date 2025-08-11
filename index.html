@@ -6,132 +6,128 @@
 <title>Made in Sud - Menu</title>
 
 <style>
-  :root {
+  :root{
     --black: #000;
   }
 
-  html, body {
-    height: 100%;
-    margin: 0;
-    background: url('img/sfondo.jpg') no-repeat center center/cover;
+  html,body{
+    height:100%;
+    margin:0;
+    background: url('sfondo.jpg') no-repeat center center/cover;
     font-family: 'Orbiga', sans-serif;
   }
 
-  @font-face {
+  @font-face{
     font-family: 'Orbiga';
     src: url('fonts/Orbiga.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
 
-  @font-face {
+  @font-face{
     font-family: 'Modica Ultra';
     src: url('fonts/ModicaUltra.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
 
-  .phone {
-    width: 390px;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 18px;
-    box-sizing: border-box;
+  .phone{
+    width:390px;
+    max-width:100%;
+    margin:0 auto;
+    padding:18px;
+    box-sizing:border-box;
   }
 
-  .logo {
-    height: 120px; /* fissa altezza logo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .logo img {
-    max-height: 100%;
-    width: auto;
-    display: block;
+  .logo img{
+    width:100%;
+    height:auto;
+    display:block;
     transition: opacity 0.28s ease, transform 0.28s ease;
   }
-  .logo img.fading {
-    opacity: 0;
+  .logo img.fading{
+    opacity:0;
     transform: scale(0.985);
   }
 
-  .menu {
-    margin-top: 38px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  .menu{
+    margin-top:38px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
   }
 
-  .menu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 34px;
-    color: var(--black);
-    cursor: pointer;
-    padding: 8px 0;
-    user-select: none;
+  .menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:34px;
+    color:var(--black);
+    cursor:pointer;
+    padding:8px 0;
+    user-select:none;
     font-family: 'Orbiga', sans-serif;
   }
 
-  .menu-item .plus {
-    font-size: 34px;
-    font-weight: bold;
+  .menu-item .plus{
+    font-size:34px;
+    font-weight:bold;
     transition: transform 0.28s ease;
-    display: inline-block;
+    display:inline-block;
   }
-  .menu-item.open .plus {
+  .menu-item.open .plus{
     transform: rotate(180deg);
   }
 
-  .submenu {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
+  .submenu{
+    overflow:hidden;
+    max-height:0;
+    opacity:0;
     transform: translateY(-6px);
     transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
-  .submenu.open {
+  .submenu.open{
     max-height: 500px;
-    opacity: 1;
+    opacity:1;
     transform: translateY(0);
   }
 
-  .submenu .submenu-item {
+  .submenu .submenu-item{
     display: flex;
     justify-content: space-between;
-    padding: 8px 0 8px 18px;
-    font-size: 22px;
-    color: var(--black);
-    opacity: 0;
+    padding:8px 0 8px 18px;
+    font-size:22px;
+    color:var(--black);
+    opacity:0;
     transform: translateY(6px);
     transition: transform 0.35s ease, opacity 0.35s ease;
     font-family: 'Modica Ultra', sans-serif;
   }
 
-  .submenu.open .submenu-item { opacity: 1; transform: none; }
+  .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
+  .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
-  @media (max-width:420px) {
-    .menu-item { font-size: 30px; }
-    .menu-item .plus { font-size: 30px; }
-    .submenu .submenu-item { font-size: 20px; }
+  @media (max-width:420px){
+    .menu-item{ font-size:30px; }
+    .menu-item .plus{ font-size:30px; }
+    .submenu .submenu-item{ font-size:20px; }
   }
 </style>
 </head>
 <body>
   <div class="phone">
     <header class="logo">
-      <img id="mainLogo" src="img/logo.png" alt="Made in Sud Pizza">
+      <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
     </header>
 
     <nav class="menu">
-
       <!-- Antipasti -->
-      <div class="menu-item" data-category="Antipasti">
-        <span>Antipasti</span><span class="plus">+</span>
-      </div>
-      <div class="submenu">
+      <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
+      <div id="antipastiList" class="submenu">
         <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
         <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
         <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
@@ -141,10 +137,8 @@
       </div>
 
       <!-- Friggitoria -->
-      <div class="menu-item" data-category="Friggitoria">
-        <span>Friggitoria</span><span class="plus">+</span>
-      </div>
-      <div class="submenu">
+      <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+      <div id="friggitoriaList" class="submenu">
         <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
         <div class="submenu-item"><span>Patata grande</span><span>€8,00</span></div>
         <div class="submenu-item"><span>Crocchette di patate</span><span>€5,00</span></div>
@@ -156,52 +150,51 @@
       </div>
 
       <!-- Pizze -->
-      <div class="menu-item" data-category="Pizze"><span>Pizze</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
+      <div id="pizzeList" class="submenu"></div>
 
       <!-- Pucce -->
-      <div class="menu-item" data-category="Pucce"><span>Pucce</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
+      <div id="pucceList" class="submenu"></div>
 
       <!-- Taglieri -->
-      <div class="menu-item" data-category="Taglieri"><span>Taglieri</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
+      <div id="taglieriList" class="submenu"></div>
 
       <!-- Braceria -->
-      <div class="menu-item" data-category="Braceria"><span>Braceria</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+      <div id="braceriaList" class="submenu"></div>
 
       <!-- Bevande -->
-      <div class="menu-item" data-category="Bevande"><span>Bevande</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
+      <div id="bevandeList" class="submenu"></div>
 
       <!-- Cocktail -->
-      <div class="menu-item" data-category="Cocktail"><span>Cocktail</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
+      <div id="cocktailList" class="submenu"></div>
 
       <!-- Birre -->
-      <div class="menu-item" data-category="Birre"><span>Birre</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
+      <div id="birreList" class="submenu"></div>
 
       <!-- Vini -->
-      <div class="menu-item" data-category="Vini"><span>Vini</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
+      <div id="viniList" class="submenu"></div>
 
       <!-- Caffè & Amari -->
-      <div class="menu-item" data-category="CaffeAmari"><span>Caffè & Amari</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
+      <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
+      <div id="caffeamariList" class="submenu"></div>
 
       <!-- Dolci -->
-      <div class="menu-item" data-category="Dolci"><span>Dolci</span><span class="plus">+</span></div>
-      <div class="submenu"></div>
-
+      <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
+      <div id="dolciList" class="submenu"></div>
     </nav>
   </div>
-
+  
 <script>
 (function(){
+  const defaultLogo = 'logo.png';
   const logo = document.getElementById('mainLogo');
-  const defaultLogo = 'img/logo.png';
 
   function switchLogo(newSrc){
     logo.classList.add('fading');
@@ -209,25 +202,50 @@
     setTimeout(() => { logo.classList.remove('fading'); }, 260);
   }
 
-  document.querySelectorAll('.menu-item').forEach((item, idx) => {
-    item.addEventListener('click', () => {
-      const submenu = item.nextElementSibling;
-      const open = submenu.classList.contains('open');
+  function setupAccordion(id, logoSrc){
+    const toggle = document.getElementById(id + 'Toggle');
+    const submenu = document.getElementById(id + 'List');
+    const plus = toggle.querySelector('.plus');
+
+    toggle.addEventListener('mousedown', e => e.preventDefault());
+
+    toggle.addEventListener('click', () => {
+      const isOpen = submenu.classList.contains('open');
 
       document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
       document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
       document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
 
-      if (!open) {
-        item.classList.add('open');
+      if(!isOpen){
         submenu.classList.add('open');
-        item.querySelector('.plus').textContent = '−';
-        switchLogo(`img/${item.dataset.category}.png`);
+        toggle.classList.add('open');
+        plus.textContent = '−';
+        switchLogo(logoSrc);
       } else {
         switchLogo(defaultLogo);
       }
     });
-  });
+
+    toggle.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
+    });
+  }
+
+  setupAccordion('antipasti', 'antipasti.png');
+  setupAccordion('friggitoria', 'friggitoria.png');
+  setupAccordion('pizze', 'pizze.png');
+  setupAccordion('pucce', 'pucce.png');
+  setupAccordion('taglieri', 'taglieri.png');
+  setupAccordion('braceria', 'braceria.png');
+  setupAccordion('bevande', 'bevande.png');
+  setupAccordion('cocktail', 'cocktail.png');
+  setupAccordion('birre', 'birre.png');
+  setupAccordion('vini', 'vini.png');
+  setupAccordion('caffeamari', 'caffeamari.png');
+  setupAccordion('dolci', 'dolci.png');
 })();
 </script>
 </body>
