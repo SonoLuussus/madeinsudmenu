@@ -19,16 +19,7 @@
     align-items: flex-start;
     background: url('sfondo.jpg') no-repeat center center fixed;
     background-size: cover;
-  }
-
-  .phone {
-    position: relative;
-    width: 390px;
-    max-width: 100%;
-    padding: 18px;
-    box-sizing: border-box;
-    background: none;
-    overflow: hidden;
+    font-family: 'Modica Ultra', sans-serif;
   }
 
   @font-face {
@@ -38,11 +29,24 @@
     font-style: normal;
   }
 
+  .phone {
+    position: relative;
+    width: 390px;
+    max-width: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* Animazione logo */
   .logo img {
     width: 100%;
     height: auto;
     display: block;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+  .logo img.fading {
+    opacity: 0;
+    transform: scale(0.985);
   }
 
   .menu {
@@ -56,9 +60,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Modica Ultra', sans-serif;
     font-size: 28px;
-    color: black;
+    color: var(--black);
     cursor: pointer;
     padding: 10px 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -68,48 +71,46 @@
   .plus {
     font-size: 28px;
     font-weight: bold;
-    transition: transform 0.3s ease;
+    transition: transform 0.28s ease;
+    display: inline-block;
+  }
+  .menu-item.open .plus {
+    transform: rotate(180deg);
   }
 
-  /* Effetto tendina */
+  /* Effetto tendina con animazione */
   .submenu {
-    max-height: 0;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-left: 10px;
+    max-height: 0;
     opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.4s ease;
+    transform: translateY(-6px);
+    transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
-
   .submenu.open {
-    max-height: 500px; /* abbastanza grande per contenere tutto */
+    max-height: 500px;
     opacity: 1;
+    transform: translateY(0);
   }
 
-  .submenu span {
-    font-family: 'Modica Ultra', sans-serif;
+  .submenu .submenu-item {
+    padding: 8px 0 8px 18px;
     font-size: 20px;
-    color: black;
+    color: var(--black);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: transform 0.35s ease, opacity 0.35s ease;
   }
 
-  .menu a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Modica Ultra', sans-serif;
-    font-size: 28px;
-    color: black;
-    text-decoration: none;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
+  .submenu.open .submenu-item:nth-child(1) { transition-delay: .04s; opacity: 1; transform: none; }
+  .submenu.open .submenu-item:nth-child(2) { transition-delay: .08s; opacity: 1; transform: none; }
+  .submenu.open .submenu-item:nth-child(3) { transition-delay: .12s; opacity: 1; transform: none; }
+  .submenu.open .submenu-item:nth-child(4) { transition-delay: .16s; opacity: 1; transform: none; }
+  .submenu.open .submenu-item:nth-child(5) { transition-delay: .20s; opacity: 1; transform: none; }
 
   @media (max-width: 420px) {
-    .menu-item, .menu a { font-size: 24px; }
+    .menu-item { font-size: 24px; }
     .plus { font-size: 24px; }
-    .submenu span { font-size: 18px; }
+    .submenu .submenu-item { font-size: 18px; }
   }
 </style>
 </head>
@@ -118,67 +119,59 @@
     <header class="logo">
       <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
     </header>
+
     <nav class="menu">
       <div id="antipastiToggle" class="menu-item">
         <span>Antipasti</span>
         <span class="plus" id="antipastiPlus">+</span>
       </div>
       <div class="submenu" id="antipastiList">
-        <span>Gulash</span>
-        <span>Lumache</span>
-        <span>Polipo Arrosto</span>
-        <span>Cozze Fritte</span>
-        <span>Piatto Verdure Grigliate</span>
+        <div class="submenu-item">Gulash</div>
+        <div class="submenu-item">Lumache</div>
+        <div class="submenu-item">Polipo Arrosto</div>
+        <div class="submenu-item">Cozze Fritte</div>
+        <div class="submenu-item">Verdure Grigliate</div>
       </div>
 
-      <a href="friggitoria.html">
-        <span>Friggitoria</span>
-        <span class="plus">+</span>
-      </a>
-      <a href="braceria.html">
-        <span>Braceria</span>
-        <span class="plus">+</span>
-      </a>
-      <a href="pucceria.html">
-        <span>Pucceria</span>
-        <span class="plus">+</span>
-      </a>
-      <a href="pizze.html">
-        <span>Pizze</span>
-        <span class="plus">+</span>
-      </a>
+      <div class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pucceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
     </nav>
   </div>
 
 <script>
-  const antipastiToggle = document.getElementById('antipastiToggle');
-  const antipastiList = document.getElementById('antipastiList');
-  const antipastiPlus = document.getElementById('antipastiPlus');
-  const mainLogo = document.getElementById('mainLogo');
+  (function(){
+    const toggle = document.getElementById('antipastiToggle');
+    const plus = document.getElementById('antipastiPlus');
+    const submenu = document.getElementById('antipastiList');
+    const logo = document.getElementById('mainLogo');
 
-  antipastiToggle.addEventListener('click', () => {
-    const isOpen = antipastiList.classList.contains('open');
-
-    if (isOpen) {
-      antipastiList.classList.remove('open');
-      antipastiPlus.textContent = '+';
-      antipastiPlus.style.transform = 'rotate(0deg)';
-      mainLogo.style.opacity = 0;
-      setTimeout(() => {
-        mainLogo.src = 'logo.png';
-        mainLogo.style.opacity = 1;
-      }, 300);
-    } else {
-      antipastiList.classList.add('open');
-      antipastiPlus.textContent = '−';
-      antipastiPlus.style.transform = 'rotate(180deg)';
-      mainLogo.style.opacity = 0;
-      setTimeout(() => {
-        mainLogo.src = 'antipasti.png';
-        mainLogo.style.opacity = 1;
-      }, 300);
+    function switchLogo(newSrc){
+      logo.classList.add('fading');
+      setTimeout(() => { logo.src = newSrc; }, 220);
+      setTimeout(() => { logo.classList.remove('fading'); }, 260);
     }
-  });
+
+    function openMenu(){
+      toggle.classList.add('open');
+      submenu.classList.add('open');
+      plus.textContent = '−';
+      switchLogo('antipasti.png');
+    }
+
+    function closeMenu(){
+      toggle.classList.remove('open');
+      submenu.classList.remove('open');
+      plus.textContent = '+';
+      switchLogo('logo.png');
+    }
+
+    toggle.addEventListener('click', () => {
+      if(submenu.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+  })();
 </script>
 </body>
 </html>
