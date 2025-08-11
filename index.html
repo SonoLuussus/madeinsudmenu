@@ -182,8 +182,8 @@
       <div id="viniList" class="submenu"></div>
 
       <!-- Caffè & Amari -->
-      <div id="caffeToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
-      <div id="caffeList" class="submenu"></div>
+      <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
+      <div id="caffeamariList" class="submenu"></div>
 
       <!-- Dolci -->
       <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
@@ -192,51 +192,61 @@
   </div>
   
 <script>
-  (function(){
-    const logo = document.getElementById('mainLogo');
-    const defaultLogo = 'logo.png';
+(function(){
+  const defaultLogo = 'logo.png';
+  const logo = document.getElementById('mainLogo');
 
-    function switchLogo(newSrc){
-      logo.classList.add('fading');
-      setTimeout(() => { logo.src = newSrc; }, 220);
-      setTimeout(() => { logo.classList.remove('fading'); }, 260);
-    }
+  function switchLogo(newSrc){
+    logo.classList.add('fading');
+    setTimeout(() => { logo.src = newSrc; }, 220);
+    setTimeout(() => { logo.classList.remove('fading'); }, 260);
+  }
 
-    function setupAccordion(id, logoSrc){
-      const toggle = document.getElementById(id + 'Toggle');
-      const submenu = document.getElementById(id + 'List');
-      const plus = toggle.querySelector('.plus');
+  function setupAccordion(id, logoSrc){
+    const toggle = document.getElementById(id + 'Toggle');
+    const submenu = document.getElementById(id + 'List');
+    const plus = toggle.querySelector('.plus');
 
-      toggle.addEventListener('click', () => {
-        const isOpen = submenu.classList.contains('open');
-        document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
-        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
-        document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
-        
-        if(!isOpen){
-          submenu.classList.add('open');
-          toggle.classList.add('open');
-          plus.textContent = '−';
-          switchLogo(logoSrc);
-        } else {
-          switchLogo(defaultLogo);
-        }
-      });
-    }
+    toggle.addEventListener('mousedown', e => e.preventDefault());
 
-    setupAccordion('antipasti', 'antipasti.png');
-    setupAccordion('friggitoria', 'friggitoria.png');
-    setupAccordion('pizze', 'pizze.png');
-    setupAccordion('pucce', 'pucce.png');
-    setupAccordion('taglieri', 'taglieri.png');
-    setupAccordion('braceria', 'braceria.png');
-    setupAccordion('bevande', 'bevande.png');
-    setupAccordion('cocktail', 'cocktail.png');
-    setupAccordion('birre', 'birre.png');
-    setupAccordion('vini', 'vini.png');
-    setupAccordion('caffe', 'caffe.png');
-    setupAccordion('dolci', 'dolci.png');
-  })();
+    toggle.addEventListener('click', () => {
+      const isOpen = submenu.classList.contains('open');
+
+      document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
+      document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
+
+      if(!isOpen){
+        submenu.classList.add('open');
+        toggle.classList.add('open');
+        plus.textContent = '−';
+        switchLogo(logoSrc);
+      } else {
+        switchLogo(defaultLogo);
+      }
+    });
+
+    toggle.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
+    });
+  }
+
+  setupAccordion('antipasti', 'antipasti.png');
+  setupAccordion('friggitoria', 'friggitoria.png');
+  setupAccordion('pizze', 'pizze.png');
+  setupAccordion('pucce', 'pucce.png');
+  setupAccordion('taglieri', 'taglieri.png');
+  setupAccordion('braceria', 'braceria.png');
+  setupAccordion('bevande', 'bevande.png');
+  setupAccordion('cocktail', 'cocktail.png');
+  setupAccordion('birre', 'birre.png');
+  setupAccordion('vini', 'vini.png');
+  setupAccordion('caffeamari', 'caffeamari.png');
+  setupAccordion('dolci', 'dolci.png');
+})();
 </script>
 </body>
 </html>
