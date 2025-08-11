@@ -6,102 +6,106 @@
 <title>Made in Sud - Menu</title>
 
 <style>
-  :root {
+  :root{
     --black: #000;
   }
 
-  html, body {
-    height: 100%;
-    margin: 0;
+  html,body{
+    height:100%;
+    margin:0;
     background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Modica Ultra', sans-serif;
+    font-family: 'Orbiga', sans-serif;
   }
 
-  @font-face {
+  @font-face{
+    font-family: 'Orbiga';
+    src: url('fonts/Orbiga.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face{
     font-family: 'Modica Ultra';
     src: url('fonts/ModicaUltra.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
 
-  @font-face {
-    font-family: 'Orbiga';
-    src: url('fonts/orbiga.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  .phone{
+    width:390px;
+    max-width:100%;
+    margin:0 auto;
+    padding:18px;
+    box-sizing:border-box;
   }
 
-  .phone {
-    width: 390px;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 18px;
-    box-sizing: border-box;
-  }
-
-  .logo img {
-    width: 100%;
-    height: auto;
-    display: block;
+  .logo img{
+    width:100%;
+    height:auto;
+    display:block;
     transition: opacity 0.28s ease, transform 0.28s ease;
   }
-  .logo img.fading {
-    opacity: 0;
+  .logo img.fading{
+    opacity:0;
     transform: scale(0.985);
   }
 
-  .menu {
-    margin-top: 38px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  .menu{
+    margin-top:38px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
   }
 
-  .menu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 34px;
-    color: var(--black);
-    cursor: pointer;
-    padding: 8px 0;
-    user-select: none;
-  }
-
-  .menu-item .label {
+  .menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:34px;
+    color:var(--black);
+    cursor:pointer;
+    padding:8px 0;
+    user-select:none;
     font-family: 'Orbiga', sans-serif;
   }
 
-  .menu-item .plus {
-    font-size: 34px;
-    font-weight: bold;
-    transition: transform 0.28s ease;
-    display: inline-block;
+  .menu-item .label{
+    opacity:1;
+    transform: translateX(0);
+    transition: none;
   }
-  .menu-item.open .plus {
+
+  .menu-item .plus{
+    font-size:34px;
+    font-weight:bold;
+    transition: transform 0.28s ease;
+    display:inline-block;
+  }
+  .menu-item.open .plus{
     transform: rotate(180deg);
   }
 
-  .submenu {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
+  .submenu{
+    overflow:hidden;
+    max-height:0;
+    opacity:0;
     transform: translateY(-6px);
     transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
-  .submenu.open {
+  .submenu.open{
     max-height: 500px;
-    opacity: 1;
+    opacity:1;
     transform: translateY(0);
   }
 
-  .submenu .submenu-item {
-    padding: 8px 0 8px 18px;
-    font-size: 22px;
-    color: var(--black);
-    opacity: 0;
+  .submenu .submenu-item{
+    padding:8px 0 8px 18px;
+    font-size:22px;
+    color:var(--black);
+    opacity:0;
     transform: translateY(6px);
     transition: transform 0.35s ease, opacity 0.35s ease;
+    font-family: 'Modica Ultra', sans-serif;
   }
 
   .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
@@ -111,10 +115,10 @@
   .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
   .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
-  @media (max-width: 420px) {
-    .menu-item { font-size: 30px; }
-    .menu-item .plus { font-size: 30px; }
-    .submenu .submenu-item { font-size: 20px; }
+  @media (max-width:420px){
+    .menu-item{ font-size:30px; }
+    .menu-item .plus{ font-size:30px; }
+    .submenu .submenu-item{ font-size:20px; }
   }
 </style>
 </head>
@@ -125,88 +129,70 @@
     </header>
 
     <nav class="menu">
-      <!-- Antipasti -->
       <div id="antipastiToggle" class="menu-item" role="button" tabindex="0" aria-expanded="false">
         <span class="label" id="antipastiLabel">Antipasti</span>
         <span class="plus" id="antipastiPlus">+</span>
       </div>
+
       <div id="antipastiList" class="submenu" aria-hidden="true">
-        <div class="submenu-item">Gulash</div>
-        <div class="submenu-item">Lumache</div>
-        <div class="submenu-item">Polipo Arrosto</div>
-        <div class="submenu-item">Cozze Fritte</div>
-        <div class="submenu-item">Verdure Grigliate</div>
-        <div class="submenu-item">Uccelletti</div>
+        <div class="submenu-item">Gulash -------------------- €8,00</div>
+        <div class="submenu-item">Lumache ------------------ €10,00</div>
+        <div class="submenu-item">Polipo Arrosto ----------- €12,00</div>
+        <div class="submenu-item">Cozze Fritte ------------- €7,50</div>
+        <div class="submenu-item">Verdure Grigliate -------- €6,00</div>
+        <div class="submenu-item">Uccelletti --------------- €9,00</div>
       </div>
 
-      <!-- Friggitoria -->
       <div class="menu-item"><span class="label">Friggitoria</span><span class="plus">+</span></div>
-      <!-- Pizze -->
-      <div class="menu-item"><span class="label">Pizze</span><span class="plus">+</span></div>
-      <!-- Pucce -->
-      <div class="menu-item"><span class="label">Pucce</span><span class="plus">+</span></div>
-      <!-- Taglieri -->
-      <div class="menu-item"><span class="label">Taglieri</span><span class="plus">+</span></div>
-      <!-- Braceria -->
       <div class="menu-item"><span class="label">Braceria</span><span class="plus">+</span></div>
-      <!-- Bevande -->
-      <div class="menu-item"><span class="label">Bevande</span><span class="plus">+</span></div>
-      <!-- Cocktail -->
-      <div class="menu-item"><span class="label">Cocktail</span><span class="plus">+</span></div>
-      <!-- Birre -->
-      <div class="menu-item"><span class="label">Birre</span><span class="plus">+</span></div>
-      <!-- Vini -->
-      <div class="menu-item"><span class="label">Vini</span><span class="plus">+</span></div>
-      <!-- Caffè & Amari -->
-      <div class="menu-item"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
-      <!-- Dolci -->
-      <div class="menu-item"><span class="label">Dolci</span><span class="plus">+</span></div>
+      <div class="menu-item"><span class="label">Pucceria</span><span class="plus">+</span></div>
+      <div class="menu-item"><span class="label">Pizze</span><span class="plus">+</span></div>
     </nav>
   </div>
-
+  
 <script>
-(function(){
-  const toggle = document.getElementById('antipastiToggle');
-  const plus = document.getElementById('antipastiPlus');
-  const submenu = document.getElementById('antipastiList');
-  const logo = document.getElementById('mainLogo');
+  (function(){
+    const toggle = document.getElementById('antipastiToggle');
+    const plus = document.getElementById('antipastiPlus');
+    const submenu = document.getElementById('antipastiList');
+    const logo = document.getElementById('mainLogo');
 
-  function switchLogo(newSrc){
-    logo.classList.add('fading');
-    setTimeout(() => { logo.src = newSrc; }, 220);
-    setTimeout(() => { logo.classList.remove('fading'); }, 260);
-  }
-
-  function openMenu(){
-    toggle.classList.add('open');
-    submenu.classList.add('open');
-    plus.textContent = '−';
-    submenu.setAttribute('aria-hidden','false');
-    toggle.setAttribute('aria-expanded','true');
-    switchLogo('antipasti.png');
-  }
-
-  function closeMenu(){
-    toggle.classList.remove('open');
-    submenu.classList.remove('open');
-    plus.textContent = '+';
-    submenu.setAttribute('aria-hidden','true');
-    toggle.setAttribute('aria-expanded','false');
-    switchLogo('logo.png');
-  }
-
-  toggle.addEventListener('click', () => {
-    if(submenu.classList.contains('open')) closeMenu();
-    else openMenu();
-  });
-
-  toggle.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggle.click();
+    function switchLogo(newSrc){
+      logo.classList.add('fading');
+      setTimeout(() => { logo.src = newSrc; }, 220);
+      setTimeout(() => { logo.classList.remove('fading'); }, 260);
     }
-  });
-})();
+
+    function openMenu(){
+      toggle.classList.add('open');
+      submenu.classList.add('open');
+      plus.textContent = '−';
+      submenu.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded','true');
+      switchLogo('antipasti.png');
+    }
+
+    function closeMenu(){
+      toggle.classList.remove('open');
+      submenu.classList.remove('open');
+      plus.textContent = '+';
+      submenu.setAttribute('aria-hidden','true');
+      toggle.setAttribute('aria-expanded','false');
+      switchLogo('logo.png');
+    }
+
+    toggle.addEventListener('click', () => {
+      if(submenu.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+
+    toggle.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
+    });
+  })();
 </script>
 </body>
 </html>
