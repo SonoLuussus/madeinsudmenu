@@ -14,12 +14,12 @@
     height:100%;
     margin:0;
     background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Fontspring-DEMO-modica-regular', sans-serif;
+    font-family: 'Fontspring-DEMO-modica-bold', sans-serif;
   }
 
   @font-face{
-    font-family: 'Fontspring-DEMO-modica-regular';
-    src: url('fonts/Fontspring-DEMO-modica-bold.regular') format('opentype');
+    font-family: 'Fontspring-DEMO-modica-bold';
+    src: url('fonts/Fontspring-DEMO-modica-bold.otf') format('opentype');
   }
   @font-face{
     font-family: 'Fontspring-DEMO-modica-thin';
@@ -32,6 +32,10 @@
   @font-face{
     font-family: 'ArialRoundedMTBold';
     src: url('fonts/Arial Rounded MT Bold.otf') format('opentype');
+  }
+  @font-face{
+    font-family: 'Orbiga';
+    src: url('fonts/orbiga.ttf') format('truetype');
   }
 
   .phone{
@@ -46,10 +50,16 @@
     width:100%;
     height:auto;
     display:block;
-    transition: opacity 0.4s ease; /* dissolvenza */
+    transition: opacity 0.28s ease, transform 0.28s ease;
   }
-  .logo.fade-out img{
-    opacity:0;
+
+  .fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .fade-in {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .menu{
@@ -68,7 +78,7 @@
     cursor:pointer;
     padding:8px 0;
     user-select:none;
-    font-family: 'Fontspring-DEMO-modica-regular';
+    font-family: 'Orbiga', sans-serif;
   }
 
   .menu-item .plus{
@@ -123,7 +133,7 @@
 </head>
 <body>
   <div class="phone">
-    <header class="logo" id="logoContainer">
+    <header class="logo">
       <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
     </header>
 
@@ -145,78 +155,15 @@
         <div class="submenu-item"><span>Supplì</span><span>2€</span></div>
         <div class="submenu-item"><span>Arancini</span><span>3€</span></div>
       </div>
-
-      <!-- Pizze -->
-      <div class="menu-item" data-target="pizzeList"><span class="label">Pizze</span><span class="plus">+</span></div>
-      <div id="pizzeList" class="submenu">
-        <div class="submenu-item"><span>Margherita</span><span>5€</span></div>
-        <div class="submenu-item"><span>Diavola</span><span>7€</span></div>
-      </div>
-
-      <!-- Pucce -->
-      <div class="menu-item" data-target="pucceList"><span class="label">Pucce</span><span class="plus">+</span></div>
-      <div id="pucceList" class="submenu">
-        <div class="submenu-item"><span>Puccia Classica</span><span>5€</span></div>
-      </div>
-
-      <!-- Taglieri -->
-      <div class="menu-item" data-target="taglieriList"><span class="label">Taglieri</span><span class="plus">+</span></div>
-      <div id="taglieriList" class="submenu">
-        <div class="submenu-item"><span>Tagliere Misto</span><span>12€</span></div>
-      </div>
-
-      <!-- Braceria -->
-      <div class="menu-item" data-target="braceriaList"><span class="label">Braceria</span><span class="plus">+</span></div>
-      <div id="braceriaList" class="submenu">
-        <div class="submenu-item"><span>Costata</span><span>20€</span></div>
-      </div>
-
-      <!-- Bevande -->
-      <div class="menu-item" data-target="bevandeList"><span class="label">Bevande</span><span class="plus">+</span></div>
-      <div id="bevandeList" class="submenu">
-        <div class="submenu-item"><span>Acqua</span><span>1€</span></div>
-      </div>
-
-      <!-- Cocktail -->
-      <div class="menu-item" data-target="cocktailList"><span class="label">Cocktail</span><span class="plus">+</span></div>
-      <div id="cocktailList" class="submenu">
-        <div class="submenu-item"><span>Mojito</span><span>6€</span></div>
-      </div>
-
-      <!-- Birre -->
-      <div class="menu-item" data-target="birreList"><span class="label">Birre</span><span class="plus">+</span></div>
-      <div id="birreList" class="submenu">
-        <div class="submenu-item"><span>Birra Artigianale</span><span>5€</span></div>
-      </div>
-
-      <!-- Vini -->
-      <div class="menu-item" data-target="viniList"><span class="label">Vini</span><span class="plus">+</span></div>
-      <div id="viniList" class="submenu">
-        <div class="submenu-item"><span>Rosso della Casa</span><span>4€</span></div>
-      </div>
-
-      <!-- Caffè & Amari -->
-      <div class="menu-item" data-target="caffeList"><span class="label">Caffè & Amari</span><span class="plus">+</span></div>
-      <div id="caffeList" class="submenu">
-        <div class="submenu-item"><span>Caffè</span><span>1€</span></div>
-      </div>
-
-      <!-- Dolci -->
-      <div class="menu-item" data-target="dolciList"><span class="label">Dolci</span><span class="plus">+</span></div>
-      <div id="dolciList" class="submenu">
-        <div class="submenu-item"><span>Tiramisù</span><span>4€</span></div>
-      </div>
     </nav>
   </div>
 
 <script>
-  const logo = document.getElementById('mainLogo');
-  const logoContainer = document.getElementById('logoContainer');
-
   document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', () => {
       const targetId = item.getAttribute('data-target');
       const submenu = document.getElementById(targetId);
+      const logo = document.getElementById('mainLogo');
 
       // Chiudi tutte le altre
       document.querySelectorAll('.submenu').forEach(sm => {
@@ -232,27 +179,36 @@
         submenu.classList.remove('open');
         item.classList.remove('open');
         item.querySelector('.plus').textContent = '+';
-        changeLogo('logo.png');
+
+        // Animazione cambio logo a default
+        logo.classList.add('fade-out');
+        setTimeout(() => {
+          logo.src = 'logo.png';
+          logo.classList.remove('fade-out');
+          logo.classList.add('fade-in');
+          setTimeout(() => logo.classList.remove('fade-in'), 280);
+        }, 280);
+
       } else {
         submenu.classList.add('open');
         item.classList.add('open');
         item.querySelector('.plus').textContent = '−';
-        if (targetId === 'antipastiList') {
-          changeLogo('antipasti.png');
-        } else {
-          changeLogo('logo.png');
-        }
+
+        // Animazione cambio logo
+        logo.classList.add('fade-out');
+        setTimeout(() => {
+          if (targetId === 'antipastiList') {
+            logo.src = 'antipasti.png';
+          } else {
+            logo.src = 'logo.png';
+          }
+          logo.classList.remove('fade-out');
+          logo.classList.add('fade-in');
+          setTimeout(() => logo.classList.remove('fade-in'), 280);
+        }, 280);
       }
     });
   });
-
-  function changeLogo(newSrc) {
-    logoContainer.classList.add('fade-out');
-    setTimeout(() => {
-      logo.src = newSrc;
-      logoContainer.classList.remove('fade-out');
-    }, 400);
-  }
 </script>
 </body>
 </html>
