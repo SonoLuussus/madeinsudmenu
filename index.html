@@ -39,18 +39,19 @@
     box-sizing:border-box;
   }
 
-  /* Altezza fissa per il logo */
   .logo {
-    height: 200px; /* puoi regolare questa misura */
+    min-height: 200px; /* Spazio fisso per tutte le immagini */
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .logo img{
+    height: auto;
     width: auto;
-    height: 100%;
+    max-width: 100%;
     max-height: 100%;
-    display:block;
+    display: block;
     transition: opacity 0.28s ease, transform 0.28s ease;
   }
   .logo img.fading{
