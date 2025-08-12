@@ -6,9 +6,7 @@
 <title>Made in Sud - Menu</title>
 
 <style>
-  :root{
-    --black: #000;
-  }
+  :root{ --black: #000; }
 
   html,body{
     height:100%;
@@ -40,7 +38,7 @@
   }
 
   .logo {
-    min-height: 200px;
+    min-height: 200px; /* Spazio riservato per il logo */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,27 +57,30 @@
     transform: scale(0.985);
   }
 
+  /* === qui: titolo sempre visibili (nessuno scroll della pagina inizialmente) === */
   .menu{
     margin-top:38px;
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap:8px; /* compatto per far entrare i titoli */
+    height: calc(100vh - 260px); /* spazio disponibile tolto il logo/padding */
+    overflow: hidden; /* inizialmente blocchiamo overflow intero del menu */
   }
 
   .menu-item{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    font-size:34px;
+    font-size:24px; /* ridotto per compattezza */
     color:var(--black);
     cursor:pointer;
-    padding:8px 0;
+    padding:4px 0;
     user-select:none;
     font-family: 'Orbiga', sans-serif;
   }
 
   .menu-item .plus{
-    font-size:34px;
+    font-size:24px;
     font-weight:bold;
     transition: transform 0.28s ease;
     display:inline-block;
@@ -95,8 +96,9 @@
     transform: translateY(-6px);
     transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
+  /* max-height grande così non tronca il contenuto quando aperto */
   .submenu.open{
-    max-height: 2000px; /* FIX: valore grande per non tagliare il contenuto */
+    max-height: 2000px;
     opacity:1;
     transform: translateY(0);
   }
@@ -121,9 +123,11 @@
   .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
   @media (max-width:420px){
-    .menu-item{ font-size:30px; }
-    .menu-item .plus{ font-size:30px; }
+    .menu-item{ font-size:22px; }
+    .menu-item .plus{ font-size:22px; }
     .submenu .submenu-item{ font-size:20px; }
+    /* adattiamo l'altezza menu su schermi piccoli per evitare che i titoli escano */
+    .menu{ height: calc(100vh - 240px); }
   }
 </style>
 </head>
@@ -134,6 +138,7 @@
     </header>
 
     <nav class="menu">
+      <!-- Antipasti -->
       <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
       <div id="antipastiList" class="submenu">
         <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
@@ -144,6 +149,7 @@
         <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
       </div>
 
+      <!-- Friggitoria -->
       <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
       <div id="friggitoriaList" class="submenu">
         <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
@@ -156,42 +162,56 @@
         <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
       </div>
 
+      <!-- Pizze -->
       <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
       <div id="pizzeList" class="submenu"></div>
 
+      <!-- Pucce -->
       <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
       <div id="pucceList" class="submenu"></div>
 
+      <!-- Taglieri -->
       <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
       <div id="taglieriList" class="submenu"></div>
 
+      <!-- Braceria -->
       <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
       <div id="braceriaList" class="submenu"></div>
 
+      <!-- Bevande -->
       <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
       <div id="bevandeList" class="submenu"></div>
 
+      <!-- Cocktail -->
       <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
       <div id="cocktailList" class="submenu"></div>
 
+      <!-- Birre -->
       <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
       <div id="birreList" class="submenu"></div>
 
+      <!-- Vini -->
       <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
       <div id="viniList" class="submenu"></div>
 
+      <!-- Caffè & Amari -->
       <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
       <div id="caffeamariList" class="submenu"></div>
 
+      <!-- Dolci -->
       <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
       <div id="dolciList" class="submenu"></div>
     </nav>
   </div>
-  
+
 <script>
 (function(){
   const defaultLogo = 'logo.png';
   const logo = document.getElementById('mainLogo');
+  const menuContainer = document.querySelector('.menu');
+
+  // inizialmente blocchiamo lo scroll della pagina (così tutte le intestazioni stanno in vista)
+  document.body.style.overflow = 'hidden';
 
   function switchLogo(newSrc){
     logo.classList.add('fading');
@@ -204,22 +224,43 @@
     const submenu = document.getElementById(id + 'List');
     const plus = toggle.querySelector('.plus');
 
+    // evita lo "scatto" al click col mouse
     toggle.addEventListener('mousedown', e => e.preventDefault());
 
     toggle.addEventListener('click', () => {
       const isOpen = submenu.classList.contains('open');
 
-      document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
-      document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('open'));
-      document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
-
       if(!isOpen){
+        // chiudiamo eventuali altri aperti
+        document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
+        document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
+        document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
+
+        // apriamo questo
         submenu.classList.add('open');
         toggle.classList.add('open');
         plus.textContent = '−';
         switchLogo(logoSrc);
+
+        // permetti lo scroll della pagina e lascia che il menu si espanda
+        document.body.style.overflow = 'auto';
+        menuContainer.style.height = 'auto';
+        menuContainer.style.overflow = 'visible';
       } else {
+        // chiudi questo
+        submenu.classList.remove('open');
+        toggle.classList.remove('open');
+        plus.textContent = '+';
         switchLogo(defaultLogo);
+
+        // se non ci sono altri submenu aperti, ritorna allo stato "tutti titoli visibili, nessuno scroll"
+        const anyOpen = document.querySelectorAll('.submenu.open').length > 0;
+        if(!anyOpen){
+          document.body.style.overflow = 'hidden';
+          // ripristiniamo l'altezza fissata del menu (presa dal CSS)
+          menuContainer.style.height = '';
+          menuContainer.style.overflow = 'hidden';
+        }
       }
     });
 
