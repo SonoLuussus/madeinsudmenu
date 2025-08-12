@@ -40,7 +40,7 @@
   }
 
   .logo {
-    min-height: 200px; /* Spazio fisso per tutte le immagini */
+    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,30 +59,27 @@
     transform: scale(0.985);
   }
 
-  /* Modifica per avere tutte le categorie visibili */
   .menu{
     margin-top:38px;
     display:flex;
     flex-direction:column;
-    gap:8px; /* più stretto per far entrare tutto */
-    height: calc(100vh - 260px); /* spazio disponibile tolto il logo */
-    overflow-y:auto; /* scroll interno se serve */
+    gap:18px;
   }
 
   .menu-item{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    font-size:24px; /* ridotto per compattezza */
+    font-size:34px;
     color:var(--black);
     cursor:pointer;
-    padding:4px 0;
+    padding:8px 0;
     user-select:none;
     font-family: 'Orbiga', sans-serif;
   }
 
   .menu-item .plus{
-    font-size:24px;
+    font-size:34px;
     font-weight:bold;
     transition: transform 0.28s ease;
     display:inline-block;
@@ -99,7 +96,7 @@
     transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
   .submenu.open{
-    max-height: 500px;
+    max-height: 2000px; /* FIX: valore grande per non tagliare il contenuto */
     opacity:1;
     transform: translateY(0);
   }
@@ -124,8 +121,8 @@
   .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
   @media (max-width:420px){
-    .menu-item{ font-size:22px; }
-    .menu-item .plus{ font-size:22px; }
+    .menu-item{ font-size:30px; }
+    .menu-item .plus{ font-size:30px; }
     .submenu .submenu-item{ font-size:20px; }
   }
 </style>
@@ -137,7 +134,6 @@
     </header>
 
     <nav class="menu">
-      <!-- Antipasti -->
       <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
       <div id="antipastiList" class="submenu">
         <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
@@ -148,7 +144,6 @@
         <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
       </div>
 
-      <!-- Friggitoria -->
       <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
       <div id="friggitoriaList" class="submenu">
         <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
@@ -161,43 +156,33 @@
         <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
       </div>
 
-      <!-- Pizze -->
       <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
       <div id="pizzeList" class="submenu"></div>
 
-      <!-- Pucce -->
       <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
       <div id="pucceList" class="submenu"></div>
 
-      <!-- Taglieri -->
       <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
       <div id="taglieriList" class="submenu"></div>
 
-      <!-- Braceria -->
       <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
       <div id="braceriaList" class="submenu"></div>
 
-      <!-- Bevande -->
       <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
       <div id="bevandeList" class="submenu"></div>
 
-      <!-- Cocktail -->
       <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
       <div id="cocktailList" class="submenu"></div>
 
-      <!-- Birre -->
       <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
       <div id="birreList" class="submenu"></div>
 
-      <!-- Vini -->
       <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
       <div id="viniList" class="submenu"></div>
 
-      <!-- Caffè & Amari -->
       <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
       <div id="caffeamariList" class="submenu"></div>
 
-      <!-- Dolci -->
       <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
       <div id="dolciList" class="submenu"></div>
     </nav>
