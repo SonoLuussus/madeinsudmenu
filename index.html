@@ -59,27 +59,30 @@
     transform: scale(0.985);
   }
 
+  /* Modifica per avere tutte le categorie visibili */
   .menu{
     margin-top:38px;
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap:8px; /* più stretto per far entrare tutto */
+    height: calc(100vh - 260px); /* spazio disponibile tolto il logo */
+    overflow-y:auto; /* scroll interno se serve */
   }
 
   .menu-item{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    font-size:34px;
+    font-size:24px; /* ridotto per compattezza */
     color:var(--black);
     cursor:pointer;
-    padding:8px 0;
+    padding:4px 0;
     user-select:none;
     font-family: 'Orbiga', sans-serif;
   }
 
   .menu-item .plus{
-    font-size:34px;
+    font-size:24px;
     font-weight:bold;
     transition: transform 0.28s ease;
     display:inline-block;
@@ -121,8 +124,8 @@
   .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
   @media (max-width:420px){
-    .menu-item{ font-size:30px; }
-    .menu-item .plus{ font-size:30px; }
+    .menu-item{ font-size:22px; }
+    .menu-item .plus{ font-size:22px; }
     .submenu .submenu-item{ font-size:20px; }
   }
 </style>
