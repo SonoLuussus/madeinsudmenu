@@ -64,9 +64,8 @@
    display:flex;
    flex-direction:column;
    gap:8px;
-   height: auto; /* scrollabile sempre */
-   overflow-y: auto;
-   -webkit-overflow-scrolling: touch;
+   height: calc(100vh - 260px);
+   overflow: hidden;
  }
 
  .menu-item{
@@ -127,7 +126,7 @@
    .menu-item{ font-size:22px; }
    .menu-item .plus{ font-size:22px; }
    .submenu .submenu-item{ font-size:20px; }
-   .menu{ height: auto; } /* scrollabile su mobile */
+   .menu{ height: calc(100vh - 240px); }
  }
 
  body.desktop {
@@ -212,92 +211,82 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
- const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
- document.body.classList.add(isMobile ? 'mobile' : 'desktop');
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  document.body.classList.add(isMobile ? 'mobile' : 'desktop');
 
- const defaultLogo = 'logo.png';
- const logo = document.getElementById('mainLogo');
- const menuContainer = document.querySelector('.menu');
+  const defaultLogo = 'logo.png';
+  const logo = document.getElementById('mainLogo');
+  const menuContainer = document.querySelector('.menu');
 
- const imageList = [
-   'logo.png',
-   'antipasti.png',
-   'friggitoria.png',
-   'pizze.png',
-   'pucce.png',
-   'taglieri.png',
-   'braceria.png',
-   'bevande.png',
-   'cocktail.png',
-   'birre.png',
-   'vini.png',
-   'caffeamari.png',
-   'dolci.png'
- ];
- imageList.forEach(src => { const i = new Image(); i.src = src; });
+  const imageList = [
+    'logo.png','antipasti.png','friggitoria.png','pizze.png','pucce.png',
+    'taglieri.png','braceria.png','bevande.png','cocktail.png','birre.png',
+    'vini.png','caffeamari.png','dolci.png'
+  ];
+  imageList.forEach(src => { const i = new Image(); i.src = src; });
 
- // sempre scrollabile
- menuContainer.style.overflowY = 'auto';
- menuContainer.style.height = 'auto';
- document.body.style.overflow = 'auto';
+  const initialMenuHeight = getComputedStyle(menuContainer).height;
+  menuContainer.dataset.initialHeight = initialMenuHeight;
 
- function switchLogo(newSrc){
-   logo.classList.add('fading');
-   setTimeout(() => { logo.src = newSrc; }, 50);
-   setTimeout(() => { logo.classList.remove('fading'); }, 120);
- }
+  // SCROLLABILITÀ PAGINA
+  document.body.style.overflowY = 'auto';
+  menuContainer.style.height = 'auto';
+  menuContainer.style.overflow = 'visible';
 
- function setupAccordion(id, logoSrc){
-   const toggle = document.getElementById(id + 'Toggle');
-   const submenu = document.getElementById(id + 'List');
-   const plus = toggle.querySelector('.plus');
+  function switchLogo(newSrc){
+    logo.classList.add('fading');
+    setTimeout(() => { logo.src = newSrc; }, 50);
+    setTimeout(() => { logo.classList.remove('fading'); }, 120);
+  }
 
-   toggle.addEventListener('mousedown', e => e.preventDefault());
+  function setupAccordion(id, logoSrc){
+    const toggle = document.getElementById(id + 'Toggle');
+    const submenu = document.getElementById(id + 'List');
+    const plus = toggle.querySelector('.plus');
 
-   toggle.addEventListener('click', () => {
-     const isOpen = submenu.classList.contains('open');
+    toggle.addEventListener('mousedown', e => e.preventDefault());
 
-     if (!isOpen) {
-       document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
-       document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
-       document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
+    toggle.addEventListener('click', () => {
+      const isOpen = submenu.classList.contains('open');
 
-       submenu.classList.add('open');
-       toggle.classList.add('open');
-       plus.textContent = '−';
-       switchLogo(logoSrc);
+      if (!isOpen) {
+        document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
+        document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
+        document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
 
-       document.body.style.overflow = 'auto';
-       menuContainer.style.height = 'auto';
-       menuContainer.style.overflow = 'visible';
-     } else {
-       submenu.classList.remove('open');
-       toggle.classList.remove('open');
-       plus.textContent = '+';
-       switchLogo(defaultLogo);
-     }
-   });
+        submenu.classList.add('open');
+        toggle.classList.add('open');
+        plus.textContent = '−';
+        switchLogo(logoSrc);
 
-   toggle.addEventListener('keydown', (e) => {
-     if (e.key === 'Enter' || e.key === ' ') {
-       e.preventDefault();
-       toggle.click();
-     }
-   });
- }
+      } else {
+        submenu.classList.remove('open');
+        toggle.classList.remove('open');
+        plus.textContent = '+';
+        switchLogo(defaultLogo);
+      }
+    });
 
- setupAccordion('antipasti', 'antipasti.png');
- setupAccordion('friggitoria', 'friggitoria.png');
- setupAccordion('pizze', 'pizze.png');
- setupAccordion('pucce', 'pucce.png');
- setupAccordion('taglieri', 'taglieri.png');
- setupAccordion('braceria', 'braceria.png');
- setupAccordion('bevande', 'bevande.png');
- setupAccordion('cocktail', 'cocktail.png');
- setupAccordion('birre', 'birre.png');
- setupAccordion('vini', 'vini.png');
- setupAccordion('caffeamari', 'caffeamari.png');
- setupAccordion('dolci', 'dolci.png');
+    toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
+    });
+  }
+
+  setupAccordion('antipasti', 'antipasti.png');
+  setupAccordion('friggitoria', 'friggitoria.png');
+  setupAccordion('pizze', 'pizze.png');
+  setupAccordion('pucce', 'pucce.png');
+  setupAccordion('taglieri', 'taglieri.png');
+  setupAccordion('braceria', 'braceria.png');
+  setupAccordion('bevande', 'bevande.png');
+  setupAccordion('cocktail', 'cocktail.png');
+  setupAccordion('birre', 'birre.png');
+  setupAccordion('vini', 'vini.png');
+  setupAccordion('caffeamari', 'caffeamari.png');
+  setupAccordion('dolci', 'dolci.png');
 });
 </script>
 </body>
