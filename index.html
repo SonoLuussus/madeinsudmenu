@@ -13,8 +13,19 @@
   html,body{
     height:100%;
     margin:0;
-    background: url('sfondo.jpg') no-repeat center center/cover;
     font-family: 'Orbiga', sans-serif;
+  }
+
+  /* Sfondo fisso di default */
+  body.desktop {
+    background: url('sfondo.jpg') no-repeat center center/cover;
+    background-attachment: fixed; /* sfondo fermo */
+  }
+
+  /* Sfondo scrollabile su mobile */
+  body.mobile {
+    background: url('sfondo.jpg') no-repeat center center/cover;
+    background-attachment: scroll; /* sfondo si muove con la pagina */
   }
 
   @font-face{
@@ -128,16 +139,6 @@
     .submenu .submenu-item{ font-size:20px; }
     .menu{ height: calc(100vh - 240px); }
   }
-
-  /* Stili extra per desktop */
-  body.desktop {
-    /* esempio: bordo attorno all’area menu */
-  }
-
-  /* Stili extra per mobile */
-  body.mobile {
-    /* esempio: dimensioni ottimizzate per touch */
-  }
 </style>
 </head>
 <body>
@@ -171,43 +172,34 @@
         <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
       </div>
 
-      <!-- Pizze -->
+      <!-- Altri menu -->
       <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
       <div id="pizzeList" class="submenu"></div>
 
-      <!-- Pucce -->
       <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
       <div id="pucceList" class="submenu"></div>
 
-      <!-- Taglieri -->
       <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
       <div id="taglieriList" class="submenu"></div>
 
-      <!-- Braceria -->
       <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
       <div id="braceriaList" class="submenu"></div>
 
-      <!-- Bevande -->
       <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
       <div id="bevandeList" class="submenu"></div>
 
-      <!-- Cocktail -->
       <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
       <div id="cocktailList" class="submenu"></div>
 
-      <!-- Birre -->
       <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
       <div id="birreList" class="submenu"></div>
 
-      <!-- Vini -->
       <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
       <div id="viniList" class="submenu"></div>
 
-      <!-- Caffè & Amari -->
       <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
       <div id="caffeamariList" class="submenu"></div>
 
-      <!-- Dolci -->
       <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
       <div id="dolciList" class="submenu"></div>
     </nav>
@@ -215,7 +207,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Riconoscimento dispositivo
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   document.body.classList.add(isMobile ? 'mobile' : 'desktop');
 
