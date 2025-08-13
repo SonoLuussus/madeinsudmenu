@@ -40,13 +40,11 @@
    justify-content:center;
    align-items:center;
    gap:30px;
-   background: rgba(255,255,255,0.05);
  }
 
  .intro-screen .logo img{
-   width: 250px;
+   width: 120px; /* dimensione normale */
    height: auto;
-   transition: transform 0.6s ease, width 0.6s ease;
  }
 
  .intro-screen button{
@@ -92,12 +90,6 @@
  .logo img.fading{
    opacity:0;
    transform: scale(0.985);
- }
-
- .logo.logo-small{
-   max-width: 120px;
-   transform: translateY(0);
-   margin-bottom: 20px;
  }
 
  .menu{
@@ -291,7 +283,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('openMenuBtn').addEventListener('click', () => {
     document.querySelector('.intro-screen').style.display = 'none';
     document.querySelector('.phone').style.display = 'flex';
-    logo.classList.add('logo-small');
   });
 
 });
