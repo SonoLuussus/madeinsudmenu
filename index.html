@@ -6,312 +6,298 @@
 <title>Made in Sud - Menu</title>
 
 <style>
-  :root{
-    --black: #000;
-  }
+ :root{
+   --black: #000;
+ }
 
-  html,body{
-    height:100%;
-    margin:0;
-    background: url('sfondo.jpg') no-repeat center center/cover;
-    font-family: 'Orbiga', sans-serif;
-  }
+ html,body{
+   height:100%;
+   margin:0;
+   background: url('sfondo.jpg') no-repeat center center/cover;
+   font-family: 'Orbiga', sans-serif;
+ }
 
-  @font-face{
-    font-family: 'Orbiga';
-    src: url('fonts/Orbiga.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
+ @font-face{
+   font-family: 'Orbiga';
+   src: url('fonts/Orbiga.ttf') format('truetype');
+   font-weight: normal;
+   font-style: normal;
+ }
 
-  @font-face{
-    font-family: 'Modica Ultra';
-    src: url('fonts/ModicaUltra.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
+ @font-face{
+   font-family: 'Modica Ultra';
+   src: url('fonts/ModicaUltra.ttf') format('truetype');
+   font-weight: normal;
+   font-style: normal;
+ }
 
-  .phone{
-    width:390px;
-    max-width:100%;
-    margin:0 auto;
-    padding:18px;
-    box-sizing:border-box;
-  }
+ .phone{
+   width:390px;
+   max-width:100%;
+   margin:0 auto;
+   padding:18px;
+   box-sizing:border-box;
+ }
 
-  .logo {
-    min-height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+ .logo {
+   min-height: 200px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
 
-  .logo img{
-    height: auto;
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    transition: opacity 0.28s ease, transform 0.28s ease;
-  }
-  .logo img.fading{
-    opacity:0;
-    transform: scale(0.985);
-  }
+ .logo img{
+   height: auto;
+   width: auto;
+   max-width: 100%;
+   max-height: 100%;
+   display: block;
+   transition: opacity 0.28s ease, transform 0.28s ease;
+ }
+ .logo img.fading{
+   opacity:0;
+   transform: scale(0.985);
+ }
 
-  .menu{
-    margin-top:38px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    height: calc(100vh - 260px);
-    overflow: hidden;
-  }
+ .menu{
+   margin-top:38px;
+   display:flex;
+   flex-direction:column;
+   gap:8px;
+   height: auto; /* scrollabile sempre */
+   overflow-y: auto;
+   -webkit-overflow-scrolling: touch;
+ }
 
-  .menu-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:24px;
-    color:var(--black);
-    cursor:pointer;
-    padding:4px 0;
-    user-select:none;
-    font-family: 'Orbiga', sans-serif;
-  }
+ .menu-item{
+   display:flex;
+   justify-content:space-between;
+   align-items:center;
+   font-size:24px;
+   color:var(--black);
+   cursor:pointer;
+   padding:4px 0;
+   user-select:none;
+   font-family: 'Orbiga', sans-serif;
+ }
 
-  .menu-item .plus{
-    font-size:24px;
-    font-weight:bold;
-    transition: transform 0.28s ease;
-    display:inline-block;
-  }
-  .menu-item.open .plus{
-    transform: rotate(180deg);
-  }
+ .menu-item .plus{
+   font-size:24px;
+   font-weight:bold;
+   transition: transform 0.28s ease;
+   display:inline-block;
+ }
+ .menu-item.open .plus{
+   transform: rotate(180deg);
+ }
 
-  .submenu{
-    overflow:hidden;
-    max-height:0;
-    opacity:0;
-    transform: translateY(-6px);
-    transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
-  }
-  .submenu.open{
-    max-height: 2000px;
-    opacity:1;
-    transform: translateY(0);
-  }
+ .submenu{
+   overflow:hidden;
+   max-height:0;
+   opacity:0;
+   transform: translateY(-6px);
+   transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
+ }
+ .submenu.open{
+   max-height: 2000px;
+   opacity:1;
+   transform: translateY(0);
+ }
 
-  .submenu .submenu-item{
-    display: flex;
-    justify-content: space-between;
-    padding:8px 0 8px 18px;
-    font-size:22px;
-    color:var(--black);
-    opacity:0;
-    transform: translateY(6px);
-    transition: transform 0.35s ease, opacity 0.35s ease;
-    font-family: 'Modica Ultra', sans-serif;
-  }
+ .submenu .submenu-item{
+   display: flex;
+   justify-content: space-between;
+   padding:8px 0 8px 18px;
+   font-size:22px;
+   color:var(--black);
+   opacity:0;
+   transform: translateY(6px);
+   transition: transform 0.35s ease, opacity 0.35s ease;
+   font-family: 'Modica Ultra', sans-serif;
+ }
 
-  .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
-  .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
-  @media (max-width:420px){
-    .menu-item{ font-size:22px; }
-    .menu-item .plus{ font-size:22px; }
-    .submenu .submenu-item{ font-size:20px; }
-    .menu{ height: calc(100vh - 240px); }
-  }
+ @media (max-width:420px){
+   .menu-item{ font-size:22px; }
+   .menu-item .plus{ font-size:22px; }
+   .submenu .submenu-item{ font-size:20px; }
+   .menu{ height: auto; } /* scrollabile su mobile */
+ }
 
-  /* Stili extra per desktop */
-  body.desktop {
-    /* esempio: bordo attorno all’area menu */
-  }
+ body.desktop {
+ }
 
-  /* Stili extra per mobile */
-  body.mobile {
-    /* esempio: dimensioni ottimizzate per touch */
-  }
+ body.mobile {
+ }
 </style>
 </head>
 <body>
-  <div class="phone">
-    <header class="logo">
-      <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
-    </header>
+ <div class="phone">
+   <header class="logo">
+     <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
+   </header>
 
-    <nav class="menu">
-      <!-- Antipasti -->
-      <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
-      <div id="antipastiList" class="submenu">
-        <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
-        <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
-        <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
-        <div class="submenu-item"><span>Cozze Fritte</span><span>€7,50</span></div>
-        <div class="submenu-item"><span>Verdure Grigliate</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
-      </div>
+   <nav class="menu">
+     <!-- Antipasti -->
+     <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
+     <div id="antipastiList" class="submenu">
+       <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
+       <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
+       <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
+       <div class="submenu-item"><span>Cozze Fritte</span><span>€7,50</span></div>
+       <div class="submenu-item"><span>Verdure Grigliate</span><span>€6,00</span></div>
+       <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
+     </div>
 
-      <!-- Friggitoria -->
-      <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
-      <div id="friggitoriaList" class="submenu">
-        <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Patata grande</span><span>€8,00</span></div>
-        <div class="submenu-item"><span>Crocchette di patate</span><span>€5,00</span></div>
-        <div class="submenu-item"><span>Polpette fritte</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Crocchette di pollo</span><span>€6,00</span></div>
-        <div class="submenu-item"><span>Anelli di pollo</span><span>€7,00</span></div>
-        <div class="submenu-item"><span>Alette di pollo</span><span>€7,00</span></div>
-        <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
-      </div>
+     <!-- Friggitoria -->
+     <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+     <div id="friggitoriaList" class="submenu">
+       <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
+       <div class="submenu-item"><span>Patata grande</span><span>€8,00</span></div>
+       <div class="submenu-item"><span>Crocchette di patate</span><span>€5,00</span></div>
+       <div class="submenu-item"><span>Polpette fritte</span><span>€6,00</span></div>
+       <div class="submenu-item"><span>Crocchette di pollo</span><span>€6,00</span></div>
+       <div class="submenu-item"><span>Anelli di pollo</span><span>€7,00</span></div>
+       <div class="submenu-item"><span>Alette di pollo</span><span>€7,00</span></div>
+       <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
+     </div>
 
-      <!-- Pizze -->
-      <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
-      <div id="pizzeList" class="submenu"></div>
+     <!-- Pizze -->
+     <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
+     <div id="pizzeList" class="submenu"></div>
 
-      <!-- Pucce -->
-      <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
-      <div id="pucceList" class="submenu"></div>
+     <!-- Pucce -->
+     <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
+     <div id="pucceList" class="submenu"></div>
 
-      <!-- Taglieri -->
-      <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
-      <div id="taglieriList" class="submenu"></div>
+     <!-- Taglieri -->
+     <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
+     <div id="taglieriList" class="submenu"></div>
 
-      <!-- Braceria -->
-      <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
-      <div id="braceriaList" class="submenu"></div>
+     <!-- Braceria -->
+     <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+     <div id="braceriaList" class="submenu"></div>
 
-      <!-- Bevande -->
-      <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
-      <div id="bevandeList" class="submenu"></div>
+     <!-- Bevande -->
+     <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
+     <div id="bevandeList" class="submenu"></div>
 
-      <!-- Cocktail -->
-      <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
-      <div id="cocktailList" class="submenu"></div>
+     <!-- Cocktail -->
+     <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
+     <div id="cocktailList" class="submenu"></div>
 
-      <!-- Birre -->
-      <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
-      <div id="birreList" class="submenu"></div>
+     <!-- Birre -->
+     <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
+     <div id="birreList" class="submenu"></div>
 
-      <!-- Vini -->
-      <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
-      <div id="viniList" class="submenu"></div>
+     <!-- Vini -->
+     <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
+     <div id="viniList" class="submenu"></div>
 
-      <!-- Caffè & Amari -->
-      <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
-      <div id="caffeamariList" class="submenu"></div>
+     <!-- Caffè & Amari -->
+     <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
+     <div id="caffeamariList" class="submenu"></div>
 
-      <!-- Dolci -->
-      <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
-      <div id="dolciList" class="submenu"></div>
-    </nav>
-  </div>
+     <!-- Dolci -->
+     <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
+     <div id="dolciList" class="submenu"></div>
+   </nav>
+ </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Riconoscimento dispositivo
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  document.body.classList.add(isMobile ? 'mobile' : 'desktop');
+ const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+ document.body.classList.add(isMobile ? 'mobile' : 'desktop');
 
-  const defaultLogo = 'logo.png';
-  const logo = document.getElementById('mainLogo');
-  const menuContainer = document.querySelector('.menu');
+ const defaultLogo = 'logo.png';
+ const logo = document.getElementById('mainLogo');
+ const menuContainer = document.querySelector('.menu');
 
-  const imageList = [
-    'logo.png',
-    'antipasti.png',
-    'friggitoria.png',
-    'pizze.png',
-    'pucce.png',
-    'taglieri.png',
-    'braceria.png',
-    'bevande.png',
-    'cocktail.png',
-    'birre.png',
-    'vini.png',
-    'caffeamari.png',
-    'dolci.png'
-  ];
-  imageList.forEach(src => { const i = new Image(); i.src = src; });
+ const imageList = [
+   'logo.png',
+   'antipasti.png',
+   'friggitoria.png',
+   'pizze.png',
+   'pucce.png',
+   'taglieri.png',
+   'braceria.png',
+   'bevande.png',
+   'cocktail.png',
+   'birre.png',
+   'vini.png',
+   'caffeamari.png',
+   'dolci.png'
+ ];
+ imageList.forEach(src => { const i = new Image(); i.src = src; });
 
-  const initialMenuHeight = getComputedStyle(menuContainer).height;
-  menuContainer.dataset.initialHeight = initialMenuHeight;
+ // sempre scrollabile
+ menuContainer.style.overflowY = 'auto';
+ menuContainer.style.height = 'auto';
+ document.body.style.overflow = 'auto';
 
-  document.body.style.overflow = 'hidden';
-  menuContainer.style.height = initialMenuHeight;
-  menuContainer.style.overflow = 'hidden';
+ function switchLogo(newSrc){
+   logo.classList.add('fading');
+   setTimeout(() => { logo.src = newSrc; }, 50);
+   setTimeout(() => { logo.classList.remove('fading'); }, 120);
+ }
 
-  function switchLogo(newSrc){
-    logo.classList.add('fading');
-    setTimeout(() => { logo.src = newSrc; }, 50);
-    setTimeout(() => { logo.classList.remove('fading'); }, 120);
-  }
+ function setupAccordion(id, logoSrc){
+   const toggle = document.getElementById(id + 'Toggle');
+   const submenu = document.getElementById(id + 'List');
+   const plus = toggle.querySelector('.plus');
 
-  function setupAccordion(id, logoSrc){
-    const toggle = document.getElementById(id + 'Toggle');
-    const submenu = document.getElementById(id + 'List');
-    const plus = toggle.querySelector('.plus');
+   toggle.addEventListener('mousedown', e => e.preventDefault());
 
-    toggle.addEventListener('mousedown', e => e.preventDefault());
+   toggle.addEventListener('click', () => {
+     const isOpen = submenu.classList.contains('open');
 
-    toggle.addEventListener('click', () => {
-      const isOpen = submenu.classList.contains('open');
+     if (!isOpen) {
+       document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
+       document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
+       document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
 
-      if (!isOpen) {
-        document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
-        document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
-        document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
+       submenu.classList.add('open');
+       toggle.classList.add('open');
+       plus.textContent = '−';
+       switchLogo(logoSrc);
 
-        submenu.classList.add('open');
-        toggle.classList.add('open');
-        plus.textContent = '−';
-        switchLogo(logoSrc);
+       document.body.style.overflow = 'auto';
+       menuContainer.style.height = 'auto';
+       menuContainer.style.overflow = 'visible';
+     } else {
+       submenu.classList.remove('open');
+       toggle.classList.remove('open');
+       plus.textContent = '+';
+       switchLogo(defaultLogo);
+     }
+   });
 
-        document.body.style.overflow = 'auto';
-        menuContainer.style.height = 'auto';
-        menuContainer.style.overflow = 'visible';
-      } else {
-        submenu.classList.remove('open');
-        toggle.classList.remove('open');
-        plus.textContent = '+';
-        switchLogo(defaultLogo);
+   toggle.addEventListener('keydown', (e) => {
+     if (e.key === 'Enter' || e.key === ' ') {
+       e.preventDefault();
+       toggle.click();
+     }
+   });
+ }
 
-        const anyOpen = document.querySelectorAll('.submenu.open').length > 0;
-        if (!anyOpen) {
-          document.body.style.overflow = 'hidden';
-          menuContainer.style.height = menuContainer.dataset.initialHeight;
-          menuContainer.style.overflow = 'hidden';
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }
-      }
-    });
-
-    toggle.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle.click();
-      }
-    });
-  }
-
-  setupAccordion('antipasti', 'antipasti.png');
-  setupAccordion('friggitoria', 'friggitoria.png');
-  setupAccordion('pizze', 'pizze.png');
-  setupAccordion('pucce', 'pucce.png');
-  setupAccordion('taglieri', 'taglieri.png');
-  setupAccordion('braceria', 'braceria.png');
-  setupAccordion('bevande', 'bevande.png');
-  setupAccordion('cocktail', 'cocktail.png');
-  setupAccordion('birre', 'birre.png');
-  setupAccordion('vini', 'vini.png');
-  setupAccordion('caffeamari', 'caffeamari.png');
-  setupAccordion('dolci', 'dolci.png');
+ setupAccordion('antipasti', 'antipasti.png');
+ setupAccordion('friggitoria', 'friggitoria.png');
+ setupAccordion('pizze', 'pizze.png');
+ setupAccordion('pucce', 'pucce.png');
+ setupAccordion('taglieri', 'taglieri.png');
+ setupAccordion('braceria', 'braceria.png');
+ setupAccordion('bevande', 'bevande.png');
+ setupAccordion('cocktail', 'cocktail.png');
+ setupAccordion('birre', 'birre.png');
+ setupAccordion('vini', 'vini.png');
+ setupAccordion('caffeamari', 'caffeamari.png');
+ setupAccordion('dolci', 'dolci.png');
 });
 </script>
 </body>
