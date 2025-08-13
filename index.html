@@ -129,10 +129,14 @@
     .menu{ height: calc(100vh - 240px); }
   }
 
+  /* Stili extra per desktop */
   body.desktop {
+    /* esempio: bordo attorno all’area menu */
   }
 
+  /* Stili extra per mobile */
   body.mobile {
+    /* esempio: dimensioni ottimizzate per touch */
   }
 </style>
 </head>
@@ -143,12 +147,75 @@
     </header>
 
     <nav class="menu">
-      <!-- (contenuto menu identico al tuo) -->
+      <!-- Antipasti -->
+      <div id="antipastiToggle" class="menu-item"><span>Antipasti</span><span class="plus">+</span></div>
+      <div id="antipastiList" class="submenu">
+        <div class="submenu-item"><span>Gulash</span><span>€8,00</span></div>
+        <div class="submenu-item"><span>Lumache</span><span>€10,00</span></div>
+        <div class="submenu-item"><span>Polipo Arrosto</span><span>€12,00</span></div>
+        <div class="submenu-item"><span>Cozze Fritte</span><span>€7,50</span></div>
+        <div class="submenu-item"><span>Verdure Grigliate</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Uccelletti</span><span>€9,00</span></div>
+      </div>
+
+      <!-- Friggitoria -->
+      <div id="friggitoriaToggle" class="menu-item"><span>Friggitoria</span><span class="plus">+</span></div>
+      <div id="friggitoriaList" class="submenu">
+        <div class="submenu-item"><span>Patata media</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Patata grande</span><span>€8,00</span></div>
+        <div class="submenu-item"><span>Crocchette di patate</span><span>€5,00</span></div>
+        <div class="submenu-item"><span>Polpette fritte</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Crocchette di pollo</span><span>€6,00</span></div>
+        <div class="submenu-item"><span>Anelli di pollo</span><span>€7,00</span></div>
+        <div class="submenu-item"><span>Alette di pollo</span><span>€7,00</span></div>
+        <div class="submenu-item"><span>Frittura sfiziosa</span><span>€14,00</span></div>
+      </div>
+
+      <!-- Pizze -->
+      <div id="pizzeToggle" class="menu-item"><span>Pizze</span><span class="plus">+</span></div>
+      <div id="pizzeList" class="submenu"></div>
+
+      <!-- Pucce -->
+      <div id="pucceToggle" class="menu-item"><span>Pucce</span><span class="plus">+</span></div>
+      <div id="pucceList" class="submenu"></div>
+
+      <!-- Taglieri -->
+      <div id="taglieriToggle" class="menu-item"><span>Taglieri</span><span class="plus">+</span></div>
+      <div id="taglieriList" class="submenu"></div>
+
+      <!-- Braceria -->
+      <div id="braceriaToggle" class="menu-item"><span>Braceria</span><span class="plus">+</span></div>
+      <div id="braceriaList" class="submenu"></div>
+
+      <!-- Bevande -->
+      <div id="bevandeToggle" class="menu-item"><span>Bevande</span><span class="plus">+</span></div>
+      <div id="bevandeList" class="submenu"></div>
+
+      <!-- Cocktail -->
+      <div id="cocktailToggle" class="menu-item"><span>Cocktail</span><span class="plus">+</span></div>
+      <div id="cocktailList" class="submenu"></div>
+
+      <!-- Birre -->
+      <div id="birreToggle" class="menu-item"><span>Birre</span><span class="plus">+</span></div>
+      <div id="birreList" class="submenu"></div>
+
+      <!-- Vini -->
+      <div id="viniToggle" class="menu-item"><span>Vini</span><span class="plus">+</span></div>
+      <div id="viniList" class="submenu"></div>
+
+      <!-- Caffè & Amari -->
+      <div id="caffeamariToggle" class="menu-item"><span>Caffè & Amari</span><span class="plus">+</span></div>
+      <div id="caffeamariList" class="submenu"></div>
+
+      <!-- Dolci -->
+      <div id="dolciToggle" class="menu-item"><span>Dolci</span><span class="plus">+</span></div>
+      <div id="dolciList" class="submenu"></div>
     </nav>
   </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  // Riconoscimento dispositivo
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   document.body.classList.add(isMobile ? 'mobile' : 'desktop');
 
@@ -176,15 +243,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const initialMenuHeight = getComputedStyle(menuContainer).height;
   menuContainer.dataset.initialHeight = initialMenuHeight;
 
-  // Qui la modifica: su mobile, lista scrollabile subito
-  if (isMobile) {
-    menuContainer.style.overflowY = 'auto';
-    menuContainer.style.height = 'auto';
-  } else {
-    document.body.style.overflow = 'hidden';
-    menuContainer.style.height = initialMenuHeight;
-    menuContainer.style.overflow = 'hidden';
-  }
+  document.body.style.overflow = 'hidden';
+  menuContainer.style.height = initialMenuHeight;
+  menuContainer.style.overflow = 'hidden';
 
   function switchLogo(newSrc){
     logo.classList.add('fading');
@@ -222,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
         switchLogo(defaultLogo);
 
         const anyOpen = document.querySelectorAll('.submenu.open').length > 0;
-        if (!anyOpen && !isMobile) {
+        if (!anyOpen) {
           document.body.style.overflow = 'hidden';
           menuContainer.style.height = menuContainer.dataset.initialHeight;
           menuContainer.style.overflow = 'hidden';
