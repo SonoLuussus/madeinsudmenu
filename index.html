@@ -59,21 +59,20 @@
     transform: scale(0.985);
   }
 
-  /* === qui: titolo sempre visibili (nessuno scroll iniziale della pagina) === */
   .menu{
     margin-top:38px;
     display:flex;
     flex-direction:column;
-    gap:8px; /* compatto per far entrare i titoli */
-    height: calc(100vh - 260px); /* spazio disponibile tolto il logo/padding */
-    overflow: hidden; /* blocco overflow iniziale: solo titoli visibili */
+    gap:8px;
+    height: calc(100vh - 260px);
+    overflow: hidden;
   }
 
   .menu-item{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    font-size:24px; /* ridotto per compattezza */
+    font-size:24px;
     color:var(--black);
     cursor:pointer;
     padding:4px 0;
@@ -98,7 +97,6 @@
     transform: translateY(-6px);
     transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
   }
-  /* max-height grande così non tronca il contenuto quando aperto */
   .submenu.open{
     max-height: 2000px;
     opacity:1;
@@ -129,6 +127,16 @@
     .menu-item .plus{ font-size:22px; }
     .submenu .submenu-item{ font-size:20px; }
     .menu{ height: calc(100vh - 240px); }
+  }
+
+  /* Stili extra per desktop */
+  body.desktop {
+    /* esempio: bordo attorno all’area menu */
+  }
+
+  /* Stili extra per mobile */
+  body.mobile {
+    /* esempio: dimensioni ottimizzate per touch */
   }
 </style>
 </head>
@@ -207,11 +215,14 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  // Riconoscimento dispositivo
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  document.body.classList.add(isMobile ? 'mobile' : 'desktop');
+
   const defaultLogo = 'logo.png';
   const logo = document.getElementById('mainLogo');
   const menuContainer = document.querySelector('.menu');
 
-  // Precarica immagini per eliminare ritardi di rete
   const imageList = [
     'logo.png',
     'antipasti.png',
@@ -229,18 +240,15 @@ document.addEventListener('DOMContentLoaded', function () {
   ];
   imageList.forEach(src => { const i = new Image(); i.src = src; });
 
-  // memorizza altezza iniziale del .menu (calcolata dal CSS)
   const initialMenuHeight = getComputedStyle(menuContainer).height;
   menuContainer.dataset.initialHeight = initialMenuHeight;
 
-  // inizializza stato: blocca lo scrolling della pagina (mostra solo titoli)
   document.body.style.overflow = 'hidden';
   menuContainer.style.height = initialMenuHeight;
   menuContainer.style.overflow = 'hidden';
 
   function switchLogo(newSrc){
     logo.classList.add('fading');
-    // piccolo delay visuale per fare la dissolvenza, ma immagini già precaricate quindi appaiono subito
     setTimeout(() => { logo.src = newSrc; }, 50);
     setTimeout(() => { logo.classList.remove('fading'); }, 120);
   }
@@ -250,48 +258,40 @@ document.addEventListener('DOMContentLoaded', function () {
     const submenu = document.getElementById(id + 'List');
     const plus = toggle.querySelector('.plus');
 
-    // evita "scatto" quando clicchi
     toggle.addEventListener('mousedown', e => e.preventDefault());
 
     toggle.addEventListener('click', () => {
       const isOpen = submenu.classList.contains('open');
 
       if (!isOpen) {
-        // chiude gli altri aperti
         document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
         document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
         document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
 
-        // apri questo
         submenu.classList.add('open');
         toggle.classList.add('open');
         plus.textContent = '−';
         switchLogo(logoSrc);
 
-        // rendi la pagina scrollabile per vedere il contenuto
         document.body.style.overflow = 'auto';
         menuContainer.style.height = 'auto';
         menuContainer.style.overflow = 'visible';
       } else {
-        // chiudi questo
         submenu.classList.remove('open');
         toggle.classList.remove('open');
         plus.textContent = '+';
         switchLogo(defaultLogo);
 
-        // se non ci sono altri sottomenu aperti, torna allo stato iniziale (solo titoli, niente scroll)
         const anyOpen = document.querySelectorAll('.submenu.open').length > 0;
         if (!anyOpen) {
           document.body.style.overflow = 'hidden';
           menuContainer.style.height = menuContainer.dataset.initialHeight;
           menuContainer.style.overflow = 'hidden';
-          // porta la pagina in alto per assicurare la vista delle intestazioni
           window.scrollTo({ top: 0, behavior: 'instant' });
         }
       }
     });
 
-    // accessibilità: apri/chiudi con Enter/Space
     toggle.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -300,7 +300,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // imposta gli accordion (tieni i nomi dei file immagine coerenti con la tua cartella)
   setupAccordion('antipasti', 'antipasti.png');
   setupAccordion('friggitoria', 'friggitoria.png');
   setupAccordion('pizze', 'pizze.png');
