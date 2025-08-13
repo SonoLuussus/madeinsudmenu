@@ -6,306 +6,290 @@
 <title>Made in Sud - Menu</title>
 
 <style>
-:root{
-  --black: #000;
-}
+ :root{
+   --black: #000;
+ }
 
-html,body{
-  height:100%;
-  margin:0;
-  background: url('sfondo.jpg') no-repeat center center/cover;
-  font-family: 'Orbiga', sans-serif;
-}
+ html,body{
+   height:100%;
+   margin:0;
+   background: url('sfondo.jpg') no-repeat center center/cover;
+   font-family: 'Orbiga', sans-serif;
+ }
 
-@font-face{
-  font-family: 'Orbiga';
-  src: url('fonts/Orbiga.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+ @font-face{
+   font-family: 'Orbiga';
+   src: url('fonts/Orbiga.ttf') format('truetype');
+   font-weight: normal;
+   font-style: normal;
+ }
 
-@font-face{
-  font-family: 'Modica Ultra';
-  src: url('fonts/ModicaUltra.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+ @font-face{
+   font-family: 'Modica Ultra';
+   src: url('fonts/ModicaUltra.ttf') format('truetype');
+   font-weight: normal;
+   font-style: normal;
+ }
 
-/* SCHERMATA INIZIALE */
-.intro-screen{
-  height:100%;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:30px;
-}
+ /* SCHERMATA INIZIALE */
+ .intro-screen{
+   height:100%;
+   width:100%;
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
+   align-items:center;
+   gap:30px;
+ }
 
-.intro-screen img{
-  max-width:200px;
-  margin-bottom:30px;
-}
+ .intro-screen img{
+   max-width:200px;
+   margin-bottom:30px;
+ }
 
-.intro-screen button{
-  padding:12px 24px;
-  font-size:18px;
-  cursor:pointer;
-  border:none;
-  border-radius:6px;
-  font-family: 'Orbiga', sans-serif;
-  background-color: #fff;
-  color: #000;
-  transition: background-color 0.3s ease;
-}
-.intro-screen button:hover{
-  background-color:#ddd;
-}
+ .intro-screen button{
+   padding:12px 24px;
+   font-size:18px;
+   cursor:pointer;
+   border:none;
+   border-radius:6px;
+   font-family: 'Orbiga', sans-serif;
+   background-color: #fff;
+   color: #000;
+   transition: background-color 0.3s ease;
+ }
+ .intro-screen button:hover{
+   background-color:#ddd;
+ }
 
-.phone{
-  width:390px;
-  max-width:100%;
-  margin:0 auto;
-  padding:18px;
-  box-sizing:border-box;
-  display:none;
-  flex-direction:column;
-}
+ .phone{
+   width:390px;
+   max-width:100%;
+   margin:0 auto;
+   padding:18px;
+   box-sizing:border-box;
+   display:none;
+   flex-direction:column;
+ }
 
-.logo {
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.6s ease, margin 0.6s ease;
-}
-.logo img{
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  transition: opacity 0.28s ease, transform 0.28s ease;
-}
-.logo img.fading{
-  opacity:0;
-  transform: scale(0.985);
-}
+ .logo {
+   min-height: 200px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transition: transform 0.6s ease, margin 0.6s ease;
+ }
+ .logo img{
+   height: auto;
+   width: auto;
+   max-width: 100%;
+   max-height: 100%;
+   display: block;
+   transition: opacity 0.28s ease, transform 0.28s ease;
+ }
+ .logo img.fading{
+   opacity:0;
+   transform: scale(0.985);
+ }
 
-.menu{
-  margin-top:38px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  height: calc(100vh - 260px);
-  overflow: hidden;
-}
+ .menu{
+   margin-top:38px;
+   display:flex;
+   flex-direction:column;
+   gap:8px;
+   height: calc(100vh - 260px);
+   overflow: hidden;
+ }
 
-.menu-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:24px;
-  color:var(--black);
-  cursor:pointer;
-  padding:4px 0;
-  user-select:none;
-  font-family: 'Orbiga', sans-serif;
-}
+ .menu-item{
+   display:flex;
+   justify-content:space-between;
+   align-items:center;
+   font-size:24px;
+   color:var(--black);
+   cursor:pointer;
+   padding:4px 0;
+   user-select:none;
+   font-family: 'Orbiga', sans-serif;
+ }
 
-.menu-item .plus{
-  font-size:24px;
-  font-weight:bold;
-  transition: transform 0.28s ease;
-  display:inline-block;
-}
-.menu-item.open .plus{
-  transform: rotate(180deg);
-}
+ .menu-item .plus{
+   font-size:24px;
+   font-weight:bold;
+   transition: transform 0.28s ease;
+   display:inline-block;
+ }
+ .menu-item.open .plus{
+   transform: rotate(180deg);
+ }
 
-.submenu{
-  overflow:hidden;
-  max-height:0;
-  opacity:0;
-  transform: translateY(-6px);
-  transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
-}
-.submenu.open{
-  max-height: 2000px;
-  opacity:1;
-  transform: translateY(0);
-}
+ .submenu{
+   overflow:hidden;
+   max-height:0;
+   opacity:0;
+   transform: translateY(-6px);
+   transition: max-height 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.35s ease, transform 0.35s ease;
+ }
+ .submenu.open{
+   max-height: 2000px;
+   opacity:1;
+   transform: translateY(0);
+ }
 
-.submenu .submenu-item{
-  display: flex;
-  justify-content: space-between;
-  padding:8px 0 8px 18px;
-  font-size:22px;
-  color:var(--black);
-  opacity:0;
-  transform: translateY(6px);
-  transition: transform 0.35s ease, opacity 0.35s ease;
-  font-family: 'Modica Ultra', sans-serif;
-}
+ .submenu .submenu-item{
+   display: flex;
+   justify-content: space-between;
+   padding:8px 0 8px 18px;
+   font-size:22px;
+   color:var(--black);
+   opacity:0;
+   transform: translateY(6px);
+   transition: transform 0.35s ease, opacity 0.35s ease;
+   font-family: 'Modica Ultra', sans-serif;
+ }
 
-.submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
-.submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
-.submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
-.submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
-.submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
-.submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(1){ transition-delay: .04s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(2){ transition-delay: .08s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(3){ transition-delay: .12s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(4){ transition-delay: .16s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(5){ transition-delay: .20s; opacity:1; transform:none; }
+ .submenu.open .submenu-item:nth-child(6){ transition-delay: .24s; opacity:1; transform:none; }
 
-@media (max-width:420px){
-  .menu-item{ font-size:22px; }
-  .menu-item .plus{ font-size:22px; }
-  .submenu .submenu-item{ font-size:20px; }
-  .menu{ height: calc(100vh - 240px); }
-}
+ @media (max-width:420px){
+   .menu-item{ font-size:22px; }
+   .menu-item .plus{ font-size:22px; }
+   .submenu .submenu-item{ font-size:20px; }
+   .menu{ height: calc(100vh - 240px); }
+ }
 
-body.desktop {}
-body.mobile {}
+ body.desktop {}
+ body.mobile {}
 </style>
 </head>
 <body>
 
-<!-- SCHERMATA INIZIALE -->
-<div class="intro-screen">
-  <img src="logo.png" alt="Made in Sud Pizza">
-  <button id="openMenuBtn">Visita il menù</button>
-  <button onclick="window.location.href='https://madeinsudpizza.it/'">Dai un'occhiata al nostro sito</button>
-</div>
+ <!-- SCHERMATA INIZIALE -->
+ <div class="intro-screen">
+   <img src="logo.png" alt="Made in Sud Pizza">
+   <button id="openMenuBtn">Visita il menù</button>
+   <button onclick="window.location.href='https://madeinsudpizza.it/'">Dai un'occhiata al nostro sito</button>
+ </div>
 
-<div class="phone">
-  <header class="logo">
-    <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
-  </header>
+ <div class="phone">
+   <header class="logo">
+     <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
+   </header>
 
-  <nav class="menu">
-    <!-- Inserisci qui tutto il contenuto del menu originale -->
-  </nav>
-</div>
+   <nav class="menu">
+     <!-- Inserisci qui tutte le categorie e sottomenu come nel tuo codice originale -->
+   </nav>
+ </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  document.body.classList.add(isMobile ? 'mobile' : 'desktop');
+ const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+ document.body.classList.add(isMobile ? 'mobile' : 'desktop');
 
-  const defaultLogo = 'logo.png';
-  const logo = document.getElementById('mainLogo');
-  const menuContainer = document.querySelector('.menu');
+ const defaultLogo = 'logo.png';
+ const logo = document.getElementById('mainLogo');
+ const menuContainer = document.querySelector('.menu');
 
-  const imageList = [
-    'logo.png','antipasti.png','friggitoria.png','pizze.png','pucce.png','taglieri.png','braceria.png','bevande.png',
-    'cocktail.png','birre.png','vini.png','caffeamari.png','dolci.png'
-  ];
-  imageList.forEach(src => { const i = new Image(); i.src = src; });
+ const imageList = [
+   'logo.png','antipasti.png','friggitoria.png','pizze.png','pucce.png','taglieri.png','braceria.png','bevande.png',
+   'cocktail.png','birre.png','vini.png','caffeamari.png','dolci.png'
+ ];
+ imageList.forEach(src => { const i = new Image(); i.src = src; });
 
-  const initialMenuHeight = getComputedStyle(menuContainer).height;
-  menuContainer.dataset.initialHeight = initialMenuHeight;
+ const initialMenuHeight = getComputedStyle(menuContainer).height;
+ menuContainer.dataset.initialHeight = initialMenuHeight;
 
-  if(isMobile){
-    menuContainer.style.overflowY = 'auto';
-    menuContainer.style.height = 'auto';
-  } else {
-    document.body.style.overflow = 'hidden';
-    menuContainer.style.height = initialMenuHeight;
-    menuContainer.style.overflow = 'hidden';
-  }
+ if(isMobile){
+   menuContainer.style.overflowY = 'auto';
+   menuContainer.style.height = 'auto';
+ } else {
+   document.body.style.overflow = 'hidden';
+   menuContainer.style.height = initialMenuHeight;
+   menuContainer.style.overflow = 'hidden';
+ }
 
-  function switchLogo(newSrc){
-    logo.classList.add('fading');
-    setTimeout(() => { logo.src = newSrc; }, 50);
-    setTimeout(() => { logo.classList.remove('fading'); }, 120);
-  }
+ function switchLogo(newSrc){
+   logo.classList.add('fading');
+   setTimeout(() => { logo.src = newSrc; }, 50);
+   setTimeout(() => { logo.classList.remove('fading'); }, 120);
+ }
 
-  function setupAccordion(id, logoSrc){
-    const toggle = document.getElementById(id + 'Toggle');
-    const submenu = document.getElementById(id + 'List');
-    const plus = toggle.querySelector('.plus');
+ function setupAccordion(id, logoSrc){
+   const toggle = document.getElementById(id + 'Toggle');
+   const submenu = document.getElementById(id + 'List');
+   const plus = toggle.querySelector('.plus');
 
-    toggle.addEventListener('mousedown', e => e.preventDefault());
+   toggle.addEventListener('mousedown', e => e.preventDefault());
 
-    toggle.addEventListener('click', () => {
-      const isOpen = submenu.classList.contains('open');
+   toggle.addEventListener('click', () => {
+     const isOpen = submenu.classList.contains('open');
 
-      if (!isOpen) {
-        document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
-        document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
-        document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
+     if (!isOpen) {
+       document.querySelectorAll('.submenu.open').forEach(s => s.classList.remove('open'));
+       document.querySelectorAll('.menu-item.open').forEach(m => m.classList.remove('open'));
+       document.querySelectorAll('.menu-item .plus').forEach(p => p.textContent = '+');
 
-        submenu.classList.add('open');
-        toggle.classList.add('open');
-        plus.textContent = '−';
-        switchLogo(logoSrc);
+       submenu.classList.add('open');
+       toggle.classList.add('open');
+       plus.textContent = '−';
+       switchLogo(logoSrc);
 
-        document.body.style.overflow = 'auto';
-        menuContainer.style.height = 'auto';
-        menuContainer.style.overflow = 'visible';
-      } else {
-        submenu.classList.remove('open');
-        toggle.classList.remove('open');
-        plus.textContent = '+';
-        switchLogo(defaultLogo);
+       document.body.style.overflow = 'auto';
+       menuContainer.style.height = 'auto';
+       menuContainer.style.overflow = 'visible';
+     } else {
+       submenu.classList.remove('open');
+       toggle.classList.remove('open');
+       plus.textContent = '+';
+       switchLogo(defaultLogo);
 
-        const anyOpen = document.querySelectorAll('.submenu.open').length > 0;
-        if (!anyOpen && !isMobile) {
-          document.body.style.overflow = 'hidden';
-          menuContainer.style.height = menuContainer.dataset.initialHeight;
-          menuContainer.style.overflow = 'hidden';
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }
-      }
-    });
+       const anyOpen = document.querySelectorAll('.submenu.open').length > 0;
+       if (!anyOpen && !isMobile) {
+         document.body.style.overflow = 'hidden';
+         menuContainer.style.height = menuContainer.dataset.initialHeight;
+         menuContainer.style.overflow = 'hidden';
+         window.scrollTo({ top: 0, behavior: 'instant' });
+       }
+     }
+   });
 
-    toggle.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle.click();
-      }
-    });
-  }
+   toggle.addEventListener('keydown', (e) => {
+     if (e.key === 'Enter' || e.key === ' ') {
+       e.preventDefault();
+       toggle.click();
+     }
+   });
+ }
 
-  // Setup menu come prima
-  setupAccordion('antipasti', 'antipasti.png');
-  setupAccordion('friggitoria', 'friggitoria.png');
-  setupAccordion('pizze', 'pizze.png');
-  setupAccordion('pucce', 'pucce.png');
-  setupAccordion('taglieri', 'taglieri.png');
-  setupAccordion('braceria', 'braceria.png');
-  setupAccordion('bevande', 'bevande.png');
-  setupAccordion('cocktail', 'cocktail.png');
-  setupAccordion('birre', 'birre.png');
-  setupAccordion('vini', 'vini.png');
-  setupAccordion('caffeamari', 'caffeamari.png');
-  setupAccordion('dolci', 'dolci.png');
+ // Setup menu come prima
+ setupAccordion('antipasti', 'antipasti.png');
+ setupAccordion('friggitoria', 'friggitoria.png');
+ setupAccordion('pizze', 'pizze.png');
+ setupAccordion('pucce', 'pucce.png');
+ setupAccordion('taglieri', 'taglieri.png');
+ setupAccordion('braceria', 'braceria.png');
+ setupAccordion('bevande', 'bevande.png');
+ setupAccordion('cocktail', 'cocktail.png');
+ setupAccordion('birre', 'birre.png');
+ setupAccordion('vini', 'vini.png');
+ setupAccordion('caffeamari', 'caffeamari.png');
+ setupAccordion('dolci', 'dolci.png');
 
-  // Pulsante intro: apre il menu con effetto di tutte le categorie
-  document.getElementById('openMenuBtn').addEventListener('click', () => {
-    document.querySelector('.intro-screen').style.display = 'none';
-    const phone = document.querySelector('.phone');
-    phone.style.display = 'flex';
+ // Pulsante intro: mostra menu
+ document.getElementById('openMenuBtn').addEventListener('click', () => {
+   document.querySelector('.intro-screen').style.display = 'none';
+   const phone = document.querySelector('.phone');
+   phone.style.display = 'flex';
 
-    // Logo sale sopra
-    logo.style.transform = 'translateY(0)';
-
-    // Apri tutte le categorie con effetto
-    const allSubmenus = document.querySelectorAll('.submenu');
-    const allToggles = document.querySelectorAll('.menu-item');
-    const allPluses = document.querySelectorAll('.menu-item .plus');
-
-    allSubmenus.forEach((submenu, idx) => {
-      submenu.classList.add('open');
-      const toggle = allToggles[idx];
-      toggle.classList.add('open');
-      const plus = allPluses[idx];
-      if (plus) plus.textContent = '−';
-    });
-
-    menuContainer.style.height = 'auto';
-    menuContainer.style.overflow = 'visible';
-    document.body.style.overflow = 'auto';
-  });
-
+   // Attiva scroll e mostra menu
+   menuContainer.style.height = 'auto';
+   menuContainer.style.overflow = 'visible';
+   document.body.style.overflow = 'auto';
+ });
 });
 </script>
 </body>
