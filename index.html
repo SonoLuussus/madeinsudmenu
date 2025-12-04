@@ -170,7 +170,7 @@
 
  <!-- SCHERMATA INTRO -->
  <div class="intro-screen">
-   <img src="logo.png" alt="Logo">
+   <img src="logo.webp" alt="Logo">
    <button id="openMenuBtn">Visita il menù</button>
    <button onclick="window.open('https://madeinsudpizza.it/', '_blank')">Dai un'occhiata al nostro sito</button>
  </div>
@@ -178,7 +178,7 @@
  <!-- SCHERMATA CATEGORIE -->
  <div class="phone">
    <header class="logo">
-     <img id="mainLogo" src="logo.png" alt="Made in Sud Pizza">
+     <img id="mainLogo" src="logo.webp" alt="Made in Sud Pizza">
    </header>
 
    <nav class="menu">
@@ -253,14 +253,14 @@ document.addEventListener('DOMContentLoaded', function () {
  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
  document.body.classList.add(isMobile ? 'mobile' : 'desktop');
 
- const defaultLogo = 'logo.png';
+ const defaultLogo = 'logo.webp';
  const logo = document.getElementById('mainLogo');
  const menuContainer = document.querySelector('.menu');
 
  const imageList = [
-   'logo.png','antipasti.png','friggitoria.png','pizze.png','pucce.png',
-   'taglieri.png','braceria.png','bevande.png','cocktail.png','birre.png',
-   'vini.png','caffeamari.png','dolci.png'
+   'logo.webp','antipasti.webp','friggitoria.webp','pizze.webp','pucce.webp',
+   'taglieri.webp','braceria.webp','bevande.webp','cocktail.webp','birre.webp',
+   'vini.webp','caffeamari.webp','dolci.webp'
  ];
  imageList.forEach(src => { const i = new Image(); i.src = src; });
 
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
  // setup tutte le categorie
  const categories = ['antipasti','friggitoria','pizze','pucce','taglieri','braceria','bevande','cocktail','birre','vini','caffeamari','dolci'];
- categories.forEach(cat => setupAccordion(cat, cat+'.png'));
+ categories.forEach(cat => setupAccordion(cat, cat+'.webp'));
 
  // APRI SCHERMATA CATEGORIE DAL PULSANTE
  document.getElementById('openMenuBtn').addEventListener('click', () => {
